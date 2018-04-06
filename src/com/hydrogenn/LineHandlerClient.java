@@ -15,13 +15,17 @@ import java.io.OutputStream;
 import java.net.Socket;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.Timer;
+      
 
 /**
  *
  * @author Joshua Davenport
  */
 public class LineHandlerClient extends javax.swing.JFrame {
-
+    private final static int TIME = 5000;
+    
+    private Timer timer;
     /** Creates new form LineHandlerClient */
     public LineHandlerClient() {
         initComponents();
@@ -206,6 +210,9 @@ public class LineHandlerClient extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         joinServer();
+        jButton1.setEnabled(false);
+        timer.start();
+        jButton1.setEnabled(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void nameTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nameTextFieldActionPerformed
