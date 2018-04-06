@@ -245,8 +245,8 @@ public class LineHandlerGUI extends javax.swing.JFrame {
         logLabel.setText(string);
     }
 
-    void addLine(String name, String problem) {
-        problemList.add(new Problem(name, problem));
+    void addLine(String name, String project, String problem) {
+        problemList.add(new Problem(name, project, problem));
         updateLineLabel();
     }
     
@@ -261,6 +261,10 @@ public class LineHandlerGUI extends javax.swing.JFrame {
         } else {
             lineLabel.setText("No one is in line.");
         }
+    }
+
+    List<Problem> getList() {
+        return problemList;
     }
 
 }
