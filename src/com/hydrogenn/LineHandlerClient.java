@@ -17,28 +17,21 @@ import java.net.Socket;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-<<<<<<< HEAD
 import java.util.Calendar;
 import java.util.List;
-=======
 import javax.swing.Timer;
-      
->>>>>>> dbce055acbc9f163e52c2e11da98c0b3d91fd039
 
 /**
  *
  * @author Joshua Davenport
  */
 public class LineHandlerClient extends javax.swing.JFrame {
-<<<<<<< HEAD
 
     List<Problem> line = new ArrayList<>();
     
-=======
     private final static int TIME = 5000;
     
     private Timer timer;
->>>>>>> dbce055acbc9f163e52c2e11da98c0b3d91fd039
     /** Creates new form LineHandlerClient */
     public LineHandlerClient() {
         initComponents();
@@ -262,22 +255,20 @@ public class LineHandlerClient extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-<<<<<<< HEAD
     private void helpButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_helpButtonActionPerformed
-        addHelp();
+        joinServer(false);
     }//GEN-LAST:event_helpButtonActionPerformed
-=======
+
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        joinServer();
-        jButton1.setEnabled(false);
+        joinServer(true);
+        helpButton.setEnabled(false);
         timer.start();
-        jButton1.setEnabled(true);
+        helpButton.setEnabled(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void nameTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nameTextFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_nameTextFieldActionPerformed
->>>>>>> dbce055acbc9f163e52c2e11da98c0b3d91fd039
 
     private void serverCheckboxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_serverCheckboxActionPerformed
         customServerPanel.setEnabled(!serverCheckbox.isSelected());
@@ -351,7 +342,7 @@ public class LineHandlerClient extends javax.swing.JFrame {
     private javax.swing.JCheckBox serverCheckbox;
     // End of variables declaration//GEN-END:variables
 
-    private void addHelp(boolean sendProblem) {
+    private void joinServer(boolean sendProblem) {
         
         try {
             
