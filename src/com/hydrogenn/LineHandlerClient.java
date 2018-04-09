@@ -3,10 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
+//make leave line button
 package com.hydrogenn;
 
 import java.awt.Component;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -23,7 +25,7 @@ import javax.swing.Timer;
  * @author Joshua Davenport
  */
 public class LineHandlerClient extends javax.swing.JFrame {
-    private final static int TIME = 5000;
+    private final static int TIME = 1;
     
     private Timer timer;
     /** Creates new form LineHandlerClient */
@@ -210,9 +212,24 @@ public class LineHandlerClient extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         joinServer();
+        
+        
         jButton1.setEnabled(false);
         timer.start();
         jButton1.setEnabled(true);
+        //jButton1.addActionListener(new ActionListener() {
+            
+//            public void actionPerformed(ActionEvent e) {
+//                if (jButton1.getModel().isPressed()) {
+//                    jButton1.setEnabled(false);
+//                    
+//                    timer.start();
+//                }
+//                jButton1.setEnabled(true);
+//            }
+//            
+//        });
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void nameTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nameTextFieldActionPerformed
