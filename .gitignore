@@ -1,4 +1,7 @@
 
 *.class
+<<<<<<< HEAD
 build/classes/com/hydrogenn/LineHandlerClient$2.class
 build/classes/com/hydrogenn/LineHandlerClient$1.class
+=======
+>>>>>>> f768e29ab7d47badc12b9a8aa055fbb41b24fd32

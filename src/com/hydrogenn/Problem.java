@@ -12,10 +12,11 @@ package com.hydrogenn;
  */
 class Problem {
     
-    String name, problem;
+    String name, project, problem;
     
-    public Problem(String name, String problem) {
+    public Problem(String name, String project, String problem) {
         this.name = name;
+        this.project = project;
         this.problem = problem;
     }
     

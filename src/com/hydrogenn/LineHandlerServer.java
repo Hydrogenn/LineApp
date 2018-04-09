@@ -9,6 +9,7 @@ package com.hydrogenn;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.logging.Level;
@@ -44,17 +45,24 @@ public class LineHandlerServer extends Thread {
                 gui.log("Recieved a request from " + server.getRemoteSocketAddress());
                 
                 DataInputStream in = new DataInputStream(server.getInputStream());
+                ObjectOutputStream out = new ObjectOutputStream(server.getOutputStream());
                 
-                String name, problem;
+                if (in.readBoolean()) {
+                    
+                    String name, project, problem;
                 
-                name = in.readUTF();
-                problem = in.readUTF();
+                    name = in.readUTF();
+                    project = in.readUTF();
+                    problem = in.readUTF();
+
+                    gui.addLine(name, project, problem);
+
+                    out.writeUTF("Added to list!");
+                    
+                }
                 
-                gui.addLine(name, problem);
-                
-                DataOutputStream out = new DataOutputStream(server.getOutputStream());
-                out.writeUTF("Added to list!");
-                
+                out.writeObject(gui.getList());
+
                 server.close();
             }
             
