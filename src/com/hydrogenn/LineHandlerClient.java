@@ -28,14 +28,11 @@ import javax.swing.Timer;
  * @author Joshua Davenport
  */
 public class LineHandlerClient extends javax.swing.JFrame {
-<<<<<<< HEAD
     private final static int TIME = 1;
-=======
 
     List<Problem> line = new ArrayList<>();
     
-    private final static int TIME = 5000;
->>>>>>> f768e29ab7d47badc12b9a8aa055fbb41b24fd32
+    //private final static int TIME = 5000;
     
     private Timer timer;
     /** Creates new form LineHandlerClient */
@@ -266,13 +263,13 @@ public class LineHandlerClient extends javax.swing.JFrame {
     }//GEN-LAST:event_helpButtonActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-<<<<<<< HEAD
-        joinServer();
+
+        //joinServer();
         
         
-        jButton1.setEnabled(false);
-        timer.start();
-        jButton1.setEnabled(true);
+//        jButton1.setEnabled(false);
+//        timer.start();
+//        jButton1.setEnabled(true);
         //jButton1.addActionListener(new ActionListener() {
             
 //            public void actionPerformed(ActionEvent e) {
@@ -286,12 +283,10 @@ public class LineHandlerClient extends javax.swing.JFrame {
 //            
 //        });
         
-=======
         joinServer(true);
         helpButton.setEnabled(false);
         timer.start();
         helpButton.setEnabled(true);
->>>>>>> f768e29ab7d47badc12b9a8aa055fbb41b24fd32
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void nameTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nameTextFieldActionPerformed
