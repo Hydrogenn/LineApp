@@ -62,8 +62,10 @@ public class LineHandlerServer extends Thread {
                 }
                 
                 out.writeObject(gui.getList());
-
+                
+                
                 server.close();
+            
             }
             
         } catch (IOException ex) {
