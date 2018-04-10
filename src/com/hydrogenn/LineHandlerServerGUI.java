@@ -14,12 +14,12 @@ import java.util.List;
  *
  * @author Joshua Davenport
  */
-public class LineHandlerGUI extends javax.swing.JFrame {
+public class LineHandlerServerGUI extends javax.swing.JFrame {
 
     private List<Problem> problemList = new ArrayList<>();
 
     /** Creates new form GraphicsHandler */
-    public LineHandlerGUI() {
+    public LineHandlerServerGUI() {
         LineHandlerServer server = new LineHandlerServer(this);
         server.start();
         initComponents();
@@ -204,14 +204,22 @@ public class LineHandlerGUI extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(LineHandlerGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LineHandlerServerGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(LineHandlerGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LineHandlerServerGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(LineHandlerGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LineHandlerServerGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(LineHandlerGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LineHandlerServerGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -224,7 +232,7 @@ public class LineHandlerGUI extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new LineHandlerGUI().setVisible(true);
+                new LineHandlerServerGUI().setVisible(true);
             }
         });
     }
@@ -245,8 +253,13 @@ public class LineHandlerGUI extends javax.swing.JFrame {
         logLabel.setText(string);
     }
 
-    void addLine(String name, String project, String problem) {
-        problemList.add(new Problem(name, project, problem));
+    void addLine(Problem problem) {
+        problemList.add(problem);
+        updateLineLabel();
+    }
+    
+    void removeLine(Problem problem) {
+        problemList.remove(problem);
         updateLineLabel();
     }
     
