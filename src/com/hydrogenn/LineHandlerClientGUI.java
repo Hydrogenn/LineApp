@@ -62,7 +62,8 @@ public class LineHandlerClientGUI extends javax.swing.JFrame {
         lineStatusPane = new javax.swing.JScrollPane();
         lineStatusText = new javax.swing.JLabel();
         refreshButton = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        cancelButton = new javax.swing.JButton();
+        exitButton = new javax.swing.JButton();
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -207,7 +208,19 @@ public class LineHandlerClientGUI extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("Cancel Help");
+        cancelButton.setText("Cancel Help");
+        cancelButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelButtonActionPerformed(evt);
+            }
+        });
+
+        exitButton.setText("Exit");
+        exitButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                exitButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -227,8 +240,10 @@ public class LineHandlerClientGUI extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(helpButton)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton1)))
-                        .addGap(0, 59, Short.MAX_VALUE)))
+                                .addComponent(cancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(exitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -246,7 +261,8 @@ public class LineHandlerClientGUI extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(refreshButton)
                     .addComponent(helpButton)
-                    .addComponent(jButton1))
+                    .addComponent(cancelButton)
+                    .addComponent(exitButton))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -256,33 +272,6 @@ public class LineHandlerClientGUI extends javax.swing.JFrame {
     private void helpButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_helpButtonActionPerformed
         joinServer(false);
     }//GEN-LAST:event_helpButtonActionPerformed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-
-        //joinServer();
-        
-        
-//        jButton1.setEnabled(false);
-//        timer.start();
-//        jButton1.setEnabled(true);
-        //jButton1.addActionListener(new ActionListener() {
-            
-//            public void actionPerformed(ActionEvent e) {
-//                if (jButton1.getModel().isPressed()) {
-//                    jButton1.setEnabled(false);
-//                    
-//                    timer.start();
-//                }
-//                jButton1.setEnabled(true);
-//            }
-//            
-//        });
-        
-        joinServer(true);
-        helpButton.setEnabled(false);
-        timer.start();
-        helpButton.setEnabled(true);
-    }//GEN-LAST:event_jButton1ActionPerformed
 
     private void nameTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nameTextFieldActionPerformed
         // TODO add your handling code here:
@@ -302,6 +291,14 @@ public class LineHandlerClientGUI extends javax.swing.JFrame {
     private void refreshButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshButtonActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_refreshButtonActionPerformed
+
+    private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cancelButtonActionPerformed
+
+    private void exitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_exitButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -340,11 +337,12 @@ public class LineHandlerClientGUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton cancelButton;
     private javax.swing.JPanel customServerPanel;
+    private javax.swing.JButton exitButton;
     private javax.swing.JButton helpButton;
     private javax.swing.JLabel ipLabel;
     private javax.swing.JTextField ipTextField;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel5;
