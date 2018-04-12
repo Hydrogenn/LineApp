@@ -22,6 +22,11 @@ public class LineHandlerServer extends Thread {
     
     LineHandlerServerGUI gui;
     
+    
+                
+    ObjectInputStream in;
+    ObjectOutputStream out;
+    
     LineHandlerServer(LineHandlerServerGUI gui) {
         this.gui = gui;
     }
@@ -43,34 +48,38 @@ public class LineHandlerServer extends Thread {
             try (Socket server = socketServer.accept()) {
                 gui.log("Recieved a request from " + server.getRemoteSocketAddress());
                 
-                ObjectInputStream in = new ObjectInputStream(server.getInputStream());
-                ObjectOutputStream out = new ObjectOutputStream(server.getOutputStream());
+                in = new ObjectInputStream(server.getInputStream());
+                out = new ObjectOutputStream(server.getOutputStream());
                 
-                Protocol messageType = (Protocol) in.readObject();
+                Protocol messageType;
                 
-                switch (messageType) {
+                infoLoop:
+                while (true) {
+                    
+                    messageType = (Protocol) in.readObject();
                 
-                    case CLIENT_PROBLEM:
-                        getProblem(server);
-                        break;
-                    case CLIENT_SOLVED:
-                        removeProblem(server);
-                    case CLIENT_UPDATE:
-                        sendLine(server);
-                    default:
-                        if (messageType.getProtocolSide() == Protocol.ProtocolSide.CLIENT) {
-                            gui.log("This server has a malformed protocol");
-                        } else {
-                            out.writeUTF("This client has a malformed protocol");
-                        }
+                    switch (messageType) {
+
+                        case CLIENT_PROBLEM:
+                            getProblem(server);
+                            break;
+                        case CLIENT_SOLVED:
+                            removeProblem(server);
+                            break;
+                        case CLIENT_UPDATE:
+                            sendLine(server);
+                            break;
+                        case CLIENT_END:
+                            break infoLoop;
+                    }
+
                 }
-                
-                out.writeObject(gui.getList());
                 
                 server.close();
             
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(LineHandlerServer.class.getName()).log(Level.SEVERE, null, ex);
+                
             }
             
         } catch (IOException ex) {
@@ -78,53 +87,27 @@ public class LineHandlerServer extends Thread {
         }
     }
     
-    private void getProblem(Socket server) throws IOException {
-                
-        ObjectInputStream in = new ObjectInputStream(server.getInputStream());
+    private void getProblem(Socket server) throws IOException, ClassNotFoundException {
         
-        String name, project, problem;
+        Problem problem = (Problem) in.readObject();
 
-        name = in.readUTF();
-        project = in.readUTF();
-        problem = in.readUTF();
-
-        gui.addLine(new Problem(name, project, problem));
-        
-        sendLine(server);
+        gui.addLine(problem);
         
     }
     
-    private void removeProblem(Socket server) throws IOException {
-        
-        ObjectInputStream in = new ObjectInputStream(server.getInputStream());
-        
-        String name, project, problem;
+    private void removeProblem(Socket server) throws IOException, ClassNotFoundException {
 
-        name = in.readUTF();
-        project = in.readUTF();
-        problem = in.readUTF();
+        Problem problem;
 
-        gui.removeLine(new Problem(name, project, problem));
-        
-        sendLine(server);
+        problem = (Problem) in.readObject();
+
+        gui.removeLine(problem);
         
     }
     
     private void sendLine(Socket server) throws IOException {
-           
-        ObjectOutputStream out = new ObjectOutputStream(server.getOutputStream());
         
         out.writeObject(gui.getList());
-        
-        response(server, true);
-        
-    }
-    
-    private void response(Socket server, boolean success) throws IOException {
-                
-        ObjectOutputStream out = new ObjectOutputStream(server.getOutputStream());
-        
-        out.writeBoolean(success);
         
     }
     

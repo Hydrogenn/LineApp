@@ -6,11 +6,13 @@
 
 package com.hydrogenn;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Joshua Davenport
  */
-class Problem {
+class Problem implements Serializable {
     
     String name, project, problem;
     

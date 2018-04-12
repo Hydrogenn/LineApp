@@ -7,14 +7,8 @@
 package com.hydrogenn;
 
 import java.awt.Component;
-import java.io.DataOutputStream;
 import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.OutputStream;
-import java.net.Socket;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import java.util.List;
 import javax.swing.Timer;
 
@@ -26,6 +20,8 @@ public class LineHandlerClientGUI extends javax.swing.JFrame {
     private final static int TIME = 1;
 
     List<Problem> line = new ArrayList<>();
+    
+    LineHandlerClient client = new LineHandlerClient(this);
     
     //private final static int TIME = 5000;
     
@@ -254,34 +250,23 @@ public class LineHandlerClientGUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void helpButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_helpButtonActionPerformed
-        joinServer(false);
-    }//GEN-LAST:event_helpButtonActionPerformed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-
-        //joinServer();
         
+        Problem problem = new Problem(nameTextField.getText(), projectTextField.getText(), problemTextField.getText());
+        try {
+            client.connect(ipTextField.getText(), Integer.parseInt(portTextField.getText()));
+            client.send(problem);
+            client.disconnect();
+        } catch (IOException ex) {
+            log("No host found at this server.");
+        }
         
-//        jButton1.setEnabled(false);
-//        timer.start();
-//        jButton1.setEnabled(true);
-        //jButton1.addActionListener(new ActionListener() {
-            
-//            public void actionPerformed(ActionEvent e) {
-//                if (jButton1.getModel().isPressed()) {
-//                    jButton1.setEnabled(false);
-//                    
-//                    timer.start();
-//                }
-//                jButton1.setEnabled(true);
-//            }
-//            
-//        });
-        
-        joinServer(true);
         helpButton.setEnabled(false);
         timer.start();
         helpButton.setEnabled(true);
+        
+    }//GEN-LAST:event_helpButtonActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void nameTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nameTextFieldActionPerformed
@@ -300,7 +285,16 @@ public class LineHandlerClientGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_problemTextFieldActionPerformed
 
     private void refreshButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshButtonActionPerformed
-        // TODO add your handling code here:
+        
+        Problem problem = new Problem(nameTextField.getText(), projectTextField.getText(), problemTextField.getText());
+        try {
+            client.connect(ipTextField.getText(), Integer.parseInt(portTextField.getText()));
+            client.update();
+            client.disconnect();
+        } catch (IOException ex) {
+            log("No host found at this server.");
+        }
+        
     }//GEN-LAST:event_refreshButtonActionPerformed
 
     /**
@@ -361,37 +355,20 @@ public class LineHandlerClientGUI extends javax.swing.JFrame {
     private javax.swing.JCheckBox serverCheckbox;
     // End of variables declaration//GEN-END:variables
 
-    private void joinServer(boolean sendProblem) {
-        
-        try {
-            
-            Socket client = new Socket(ipTextField.getText(), Integer.parseInt(portTextField.getText()));
+    void setLine(List<Problem> line) {
+        this.line = line;
+    }
 
-            ObjectInputStream in = new ObjectInputStream(client.getInputStream());
-            
-            OutputStream outToServer = client.getOutputStream();
-            DataOutputStream out = new DataOutputStream(outToServer);
-            out.writeBoolean(sendProblem);
-            
-            if (sendProblem) {
-                out.writeUTF(nameTextField.getText());
-                out.writeUTF(projectTextField.getText());
-                out.writeUTF(problemTextField.getText());
-                logLabel.setText(in.readUTF());
-            }
-            
-            line = (List<Problem>) in.readObject();
-            
-            client.close();
-            
-        } catch (IOException ex) {
-            Logger.getLogger(LineHandlerServerGUI.class.getName()).log(Level.SEVERE, null, ex);
-            logLabel.setText("Could not send the message! Bother Hydrogenn about this.");
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(LineHandlerClientGUI.class.getName()).log(Level.WARNING, null, ex);
-            logLabel.setText("Could not refresh the list! Bother Hydrogenn about this.");
+    void log(String publicMessage) {
+        logLabel.setText(publicMessage);
+    }
+    
+    void updateLineText() {
+        String lineText = "";
+        for (Problem problem : line) {
+            lineText += problem.toString() + "<br>";
         }
-        
+        lineStatusText.setText(lineText);
     }
     
 }
