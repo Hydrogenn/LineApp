@@ -41,14 +41,13 @@ public class LineHandlerClientGUI extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        logLabel = new javax.swing.JLabel();
         helpButton = new javax.swing.JButton();
-        jPanel2 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        problemPanel = new javax.swing.JPanel();
+        nameLabel = new javax.swing.JLabel();
+        projectLabel = new javax.swing.JLabel();
         nameTextField = new javax.swing.JTextField();
         projectTextField = new javax.swing.JTextField();
-        jLabel5 = new javax.swing.JLabel();
+        problemLabel = new javax.swing.JLabel();
         problemTextField = new javax.swing.JTextField();
         customServerPanel = new javax.swing.JPanel();
         ipTextField = new javax.swing.JTextField();
@@ -75,8 +74,6 @@ public class LineHandlerClientGUI extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        logLabel.setText("Press this button for help");
-
         helpButton.setText("Send Help");
         helpButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -84,13 +81,13 @@ public class LineHandlerClientGUI extends javax.swing.JFrame {
             }
         });
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Problem Information"));
+        problemPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Problem Information"));
 
-        jLabel1.setText("Name:");
-        jLabel1.setToolTipText("Your name, so Mr. Jones knows who to help.");
+        nameLabel.setText("Name:");
+        nameLabel.setToolTipText("Your name, so Mr. Jones knows who to help.");
 
-        jLabel2.setText("Project:");
-        jLabel2.setToolTipText("The project you are having a problem with.");
+        projectLabel.setText("Project:");
+        projectLabel.setToolTipText("The project you are having a problem with.");
 
         nameTextField.setText("Name");
         nameTextField.setToolTipText("Your name, so Mr. Jones knows who to help.");
@@ -98,8 +95,8 @@ public class LineHandlerClientGUI extends javax.swing.JFrame {
         projectTextField.setText("PrintChallenge0");
         projectTextField.setToolTipText("The project you are having a problem with.");
 
-        jLabel5.setText("Problem:");
-        jLabel5.setToolTipText("Some information about the problem you are having.");
+        problemLabel.setText("Problem:");
+        problemLabel.setToolTipText("Some information about the problem you are having.");
 
         problemTextField.setToolTipText("Some information about the problem you are having.");
         problemTextField.addActionListener(new java.awt.event.ActionListener() {
@@ -108,39 +105,39 @@ public class LineHandlerClientGUI extends javax.swing.JFrame {
             }
         });
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
+        javax.swing.GroupLayout problemPanelLayout = new javax.swing.GroupLayout(problemPanel);
+        problemPanel.setLayout(problemPanelLayout);
+        problemPanelLayout.setHorizontalGroup(
+            problemPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(problemPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel5))
+                .addGroup(problemPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(projectLabel)
+                    .addComponent(nameLabel)
+                    .addComponent(problemLabel))
                 .addGap(23, 23, 23)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGroup(problemPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(problemPanelLayout.createSequentialGroup()
                         .addComponent(problemTextField)
                         .addGap(8, 8, 8))
                     .addComponent(nameTextField)
                     .addComponent(projectTextField))
                 .addContainerGap())
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+        problemPanelLayout.setVerticalGroup(
+            problemPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(problemPanelLayout.createSequentialGroup()
+                .addGroup(problemPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(nameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
+                    .addComponent(nameLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(problemPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(projectTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
+                    .addComponent(projectLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(problemPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(problemTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5)))
+                    .addComponent(problemLabel)))
         );
 
         customServerPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Server IP Address"));
@@ -228,34 +225,30 @@ public class LineHandlerClientGUI extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lineStatusPane)
                     .addComponent(customServerPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(problemPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(serverCheckbox)
+                    .addComponent(lineStatusPane)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(serverCheckbox)
-                            .addComponent(refreshButton)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(refreshButton)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(helpButton)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(cancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(exitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addComponent(refreshButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(helpButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(exitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(problemPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(serverCheckbox)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(customServerPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(lineStatusPane, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -263,7 +256,7 @@ public class LineHandlerClientGUI extends javax.swing.JFrame {
                     .addComponent(helpButton)
                     .addComponent(cancelButton)
                     .addComponent(exitButton))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         pack();
@@ -277,20 +270,16 @@ public class LineHandlerClientGUI extends javax.swing.JFrame {
             client.send(problem);
             client.disconnect();
         } catch (IOException ex) {
-            log("No host found at this server.");
+            log("Unable to connect to server.");
         }
         
-        helpButton.setEnabled(false);
-        timer.start();
-        helpButton.setEnabled(true);
+        freeze();
+        
         
     }//GEN-LAST:event_helpButtonActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
     }//GEN-LAST:event_jButton1ActionPerformed
-
-        joinServer(false);
-    }//GEN-LAST:event_helpButtonActionPerformed
 
     private void nameTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nameTextFieldActionPerformed
         // TODO add your handling code here:
@@ -315,13 +304,24 @@ public class LineHandlerClientGUI extends javax.swing.JFrame {
             client.update();
             client.disconnect();
         } catch (IOException ex) {
-            log("No host found at this server.");
+            log("Unable to connect to server.");
         }
         
     }//GEN-LAST:event_refreshButtonActionPerformed
 
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
-        // TODO add your handling code here:
+        
+        Problem problem = new Problem(nameTextField.getText(), projectTextField.getText(), problemTextField.getText());
+        try {
+            client.connect(ipTextField.getText(), Integer.parseInt(portTextField.getText()));
+            client.send(problem);
+            client.disconnect();
+        } catch (IOException ex) {
+            log("Unable to connect to server.");
+        }
+        
+        freeze();
+        
     }//GEN-LAST:event_cancelButtonActionPerformed
 
     private void exitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitButtonActionPerformed
@@ -371,17 +371,17 @@ public class LineHandlerClientGUI extends javax.swing.JFrame {
     private javax.swing.JButton helpButton;
     private javax.swing.JLabel ipLabel;
     private javax.swing.JTextField ipTextField;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane lineStatusPane;
     private javax.swing.JLabel lineStatusText;
+    private javax.swing.JLabel nameLabel;
     private javax.swing.JTextField nameTextField;
     private javax.swing.JLabel portLabel;
     private javax.swing.JTextField portTextField;
+    private javax.swing.JLabel problemLabel;
+    private javax.swing.JPanel problemPanel;
     private javax.swing.JTextField problemTextField;
+    private javax.swing.JLabel projectLabel;
     private javax.swing.JTextField projectTextField;
     private javax.swing.JButton refreshButton;
     private javax.swing.JCheckBox serverCheckbox;
@@ -392,7 +392,7 @@ public class LineHandlerClientGUI extends javax.swing.JFrame {
     }
 
     void log(String publicMessage) {
-        logLabel.setText(publicMessage);
+        System.out.println(publicMessage);
     }
     
     void updateLineText() {
@@ -401,6 +401,12 @@ public class LineHandlerClientGUI extends javax.swing.JFrame {
             lineText += problem.toString() + "<br>";
         }
         lineStatusText.setText(lineText);
+    }
+
+    private void freeze() {
+        helpButton.setEnabled(false);
+        timer.start();
+        helpButton.setEnabled(true);
     }
     
 }
