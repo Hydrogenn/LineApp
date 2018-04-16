@@ -44,8 +44,10 @@ public class LineHandlerServer extends Thread {
         try {
             
             ServerSocket socketServer = new ServerSocket(5000);
+            Socket server = socketServer.accept();
             
-            try (Socket server = socketServer.accept()) {
+            try {
+                
                 gui.log("Recieved a request from " + server.getRemoteSocketAddress());
                 
                 in = new ObjectInputStream(server.getInputStream());
@@ -74,13 +76,12 @@ public class LineHandlerServer extends Thread {
                     }
 
                 }
-                
-                server.close();
             
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(LineHandlerServer.class.getName()).log(Level.SEVERE, null, ex);
-                
             }
+                
+            server.close();
             
         } catch (IOException ex) {
             Logger.getLogger(LineHandlerServerGUI.class.getName()).log(Level.SEVERE, null, ex);

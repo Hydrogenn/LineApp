@@ -59,7 +59,7 @@ public class LineHandlerClientGUI extends javax.swing.JFrame {
         lineStatusText = new javax.swing.JLabel();
         refreshButton = new javax.swing.JButton();
         cancelButton = new javax.swing.JButton();
-        exitButton = new javax.swing.JButton();
+        sourceButton = new javax.swing.JButton();
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -211,10 +211,10 @@ public class LineHandlerClientGUI extends javax.swing.JFrame {
             }
         });
 
-        exitButton.setText("Exit");
-        exitButton.addActionListener(new java.awt.event.ActionListener() {
+        sourceButton.setText("Source");
+        sourceButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                exitButtonActionPerformed(evt);
+                sourceButtonActionPerformed(evt);
             }
         });
 
@@ -227,18 +227,24 @@ public class LineHandlerClientGUI extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(customServerPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(problemPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(serverCheckbox)
                     .addComponent(lineStatusPane)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(refreshButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(helpButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(exitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(serverCheckbox)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(refreshButton, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(helpButton, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(cancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(sourceButton)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
+
+        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {cancelButton, helpButton, refreshButton, sourceButton});
+
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -255,7 +261,7 @@ public class LineHandlerClientGUI extends javax.swing.JFrame {
                     .addComponent(refreshButton)
                     .addComponent(helpButton)
                     .addComponent(cancelButton)
-                    .addComponent(exitButton))
+                    .addComponent(sourceButton))
                 .addContainerGap())
         );
 
@@ -273,13 +279,10 @@ public class LineHandlerClientGUI extends javax.swing.JFrame {
             log("Unable to connect to server.");
         }
         
-        freeze();
+        //freeze();
         
         
     }//GEN-LAST:event_helpButtonActionPerformed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-    }//GEN-LAST:event_jButton1ActionPerformed
 
     private void nameTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nameTextFieldActionPerformed
         // TODO add your handling code here:
@@ -314,19 +317,19 @@ public class LineHandlerClientGUI extends javax.swing.JFrame {
         Problem problem = new Problem(nameTextField.getText(), projectTextField.getText(), problemTextField.getText());
         try {
             client.connect(ipTextField.getText(), Integer.parseInt(portTextField.getText()));
-            client.send(problem);
+            client.remove(problem);
             client.disconnect();
         } catch (IOException ex) {
             log("Unable to connect to server.");
         }
         
-        freeze();
+        //freeze();
         
     }//GEN-LAST:event_cancelButtonActionPerformed
 
-    private void exitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitButtonActionPerformed
+    private void sourceButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sourceButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_exitButtonActionPerformed
+    }//GEN-LAST:event_sourceButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -367,7 +370,6 @@ public class LineHandlerClientGUI extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cancelButton;
     private javax.swing.JPanel customServerPanel;
-    private javax.swing.JButton exitButton;
     private javax.swing.JButton helpButton;
     private javax.swing.JLabel ipLabel;
     private javax.swing.JTextField ipTextField;
@@ -385,6 +387,7 @@ public class LineHandlerClientGUI extends javax.swing.JFrame {
     private javax.swing.JTextField projectTextField;
     private javax.swing.JButton refreshButton;
     private javax.swing.JCheckBox serverCheckbox;
+    private javax.swing.JButton sourceButton;
     // End of variables declaration//GEN-END:variables
 
     void setLine(List<Problem> line) {

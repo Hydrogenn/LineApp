@@ -65,6 +65,19 @@ public class LineHandlerClient {
     
     public void remove(Problem problem) {
         
+        try {
+            
+            out.writeObject(Protocol.CLIENT_SOLVED);
+            
+            out.writeObject(problem);
+            
+        } catch (IOException ex) {
+            Logger.getLogger(LineHandlerServerGUI.class.getName()).log(Level.SEVERE, null, ex);
+            gui.log("Could not send the message!");
+        }
+        
+        update();
+        
     }
     
     public void update() {

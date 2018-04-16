@@ -8,6 +8,7 @@ package com.hydrogenn;
 
 import java.awt.Color;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -129,7 +130,7 @@ public class LineHandlerServerGUI extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(logPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(linePane, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(linePane, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -247,7 +248,7 @@ public class LineHandlerServerGUI extends javax.swing.JFrame {
     private javax.swing.JButton solveTopButton;
     private javax.swing.JTextField solveTypeField;
     // End of variables declaration//GEN-END:variables
-
+  
     void log(String string) {
         logLabel.setForeground(Color.BLACK);
         logLabel.setText(string);
@@ -266,8 +267,12 @@ public class LineHandlerServerGUI extends javax.swing.JFrame {
     void updateLineLabel() {
         if (problemList.size() > 0) {
             String lineLabelText = "<html>";
-            for (Problem problem : problemList) {
-                lineLabelText += problem.toString() + "<br>";
+            for (String project : getProjects()) {
+                lineLabelText += "<h3>" + project + "</h3>";
+                Iterator<Problem> iter = problemList.stream().filter(problem -> problem.getProject().equals(project)).iterator();
+                while (iter.hasNext()) {
+                    lineLabelText += iter.next().toString() + "<br>";
+                }
             }
             lineLabelText += "</html>";
             lineLabel.setText(lineLabelText);
@@ -278,6 +283,16 @@ public class LineHandlerServerGUI extends javax.swing.JFrame {
 
     List<Problem> getList() {
         return problemList;
+    }
+
+    private List<String> getProjects() {
+        List<String> projects = new ArrayList<>();
+        for (Problem problem : problemList) {
+            if (!projects.contains(problem.getProject())) {
+                projects.add(problem.getProject());
+            }
+        }
+        return projects;
     }
 
 }

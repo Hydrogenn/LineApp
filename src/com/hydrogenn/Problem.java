@@ -21,10 +21,46 @@ class Problem implements Serializable {
         this.project = project;
         this.problem = problem;
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getProject() {
+        return project;
+    }
+
+    public void setProject(String project) {
+        this.project = project;
+    }
+
+    public String getProblem() {
+        return problem;
+    }
+
+    public void setProblem(String problem) {
+        this.problem = problem;
+    }
+    
+    
     
     @Override
     public String toString() {
         return name + ": " + problem;
+    }
+    
+    @Override
+    public boolean equals(Object o) {
+        if (o instanceof Problem) {
+            Problem problem = (Problem) o;
+            return problem.getName().equals(this.getName()) &&
+                    problem.getProject().equals(this.getProject()) &&
+                    problem.getProblem().equals(this.getProject());
+        } else return false;
     }
     
 }
