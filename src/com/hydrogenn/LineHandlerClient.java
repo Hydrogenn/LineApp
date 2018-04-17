@@ -40,10 +40,10 @@ public class LineHandlerClient {
         
         System.out.println("Disconnecting");
         
-        new ObjectOutputStream(client.getOutputStream()).writeObject(Protocol.CLIENT_END);
+        out.writeObject(Protocol.CLIENT_END);
+        client.close();
         out = null;
         in = null;
-        client.close();
     }
     
     public void send(Problem problem) {

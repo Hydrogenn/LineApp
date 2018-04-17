@@ -160,9 +160,10 @@ public class LineHandlerServerGUI extends javax.swing.JFrame {
                 problemList.stream().filter((problem) -> (problem.name.equalsIgnoreCase(solveTypeField.getText()))).forEach((problem) -> {
                     problemList.remove(problem);
                     updateLineLabel();
+                    return;
                 });
             } else {
-                log("That name doesn't exist! (It has to be exactly the same, ignoring case.)");
+                log("That name doesn't exist! (It has to be exactly the same.)");
             }
         } else {
             log("There's nothing to remove!");
@@ -171,17 +172,15 @@ public class LineHandlerServerGUI extends javax.swing.JFrame {
 
     private void solveProblemButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_solveProblemButtonActionPerformed
         if (problemList.size() > 0) {
-            List<String> problemNames = new ArrayList<>();
-            problemList.stream().forEach((problem) -> {
-                problemNames.add(problem.problem);
-            });
+            List<String> problemNames = getProjects();
             if (problemNames.contains(solveTypeField.getText())) {
-                problemList.stream().filter((problem) -> (problem.problem.equalsIgnoreCase(solveTypeField.getText()))).forEach((problem) -> {
+                problemList.stream().filter((problem) -> (problem.project.equalsIgnoreCase(solveTypeField.getText()))).forEach((problem) -> {
                     problemList.remove(problem);
                     updateLineLabel();
+                    return;
                 });
             } else {
-                log("That name doesn't exist! (It has to be exactly the same, ignoring case.)");
+                log("That project doesn't exist! (It has to be exactly the same.)");
             }
         } else {
             log("There's nothing to remove!");
