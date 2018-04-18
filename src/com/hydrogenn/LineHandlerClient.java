@@ -38,8 +38,6 @@ public class LineHandlerClient {
     
     public void disconnect() throws IOException {
         
-        System.out.println("Disconnecting");
-        
         out.writeObject(Protocol.CLIENT_END);
         client.close();
         out = null;

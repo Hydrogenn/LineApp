@@ -172,7 +172,7 @@ public class LineHandlerServerGUI extends javax.swing.JFrame {
 
     private void solveProblemButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_solveProblemButtonActionPerformed
         if (problemList.size() > 0) {
-            List<String> problemNames = getProjects();
+            List<String> problemNames = Problem.getProjects(problemList);
             if (problemNames.contains(solveTypeField.getText())) {
                 problemList.stream().filter((problem) -> (problem.project.equalsIgnoreCase(solveTypeField.getText()))).forEach((problem) -> {
                     problemList.remove(problem);
@@ -262,36 +262,13 @@ public class LineHandlerServerGUI extends javax.swing.JFrame {
         problemList.remove(problem);
         updateLineLabel();
     }
-    
-    void updateLineLabel() {
-        if (problemList.size() > 0) {
-            String lineLabelText = "<html>";
-            for (String project : getProjects()) {
-                lineLabelText += "<h3>" + project + "</h3>";
-                Iterator<Problem> iter = problemList.stream().filter(problem -> problem.getProject().equals(project)).iterator();
-                while (iter.hasNext()) {
-                    lineLabelText += iter.next().toString() + "<br>";
-                }
-            }
-            lineLabelText += "</html>";
-            lineLabel.setText(lineLabelText);
-        } else {
-            lineLabel.setText("No one is in line.");
-        }
-    }
 
     List<Problem> getList() {
         return problemList;
     }
 
-    private List<String> getProjects() {
-        List<String> projects = new ArrayList<>();
-        for (Problem problem : problemList) {
-            if (!projects.contains(problem.getProject())) {
-                projects.add(problem.getProject());
-            }
-        }
-        return projects;
+    public void updateLineLabel() {
+        lineLabel.setText(Problem.updateLineLabel(problemList));
     }
 
 }
