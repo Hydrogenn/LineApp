@@ -283,7 +283,7 @@ public class LineHandlerClientGUI extends javax.swing.JFrame {
         helpButton.setEnabled(false);
         refreshButton.setEnabled(true);
 
-        //freeze();
+        lockInformation(true);
         
         
     }//GEN-LAST:event_helpButtonActionPerformed
@@ -330,7 +330,7 @@ public class LineHandlerClientGUI extends javax.swing.JFrame {
         helpButton.setEnabled(true);
         refreshButton.setEnabled(false);
         
-        //freeze();
+        lockInformation(false);
         
     }//GEN-LAST:event_cancelButtonActionPerformed
 
@@ -407,6 +407,12 @@ public class LineHandlerClientGUI extends javax.swing.JFrame {
     
     void updateLineText() {
         lineStatusText.setText(Problem.updateLineLabel(line));
+    }
+    
+    void lockInformation(boolean locked) {
+        for (Component component : problemPanel.getComponents()) {
+            component.setEnabled(!locked);
+        }
     }
     
 }
