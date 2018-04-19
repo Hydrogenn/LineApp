@@ -399,11 +399,7 @@ public class LineHandlerClientGUI extends javax.swing.JFrame {
     }
     
     void updateLineText() {
-        String lineText = "";
-        for (Problem problem : line) {
-            lineText += problem.toString() + "<br>";
-        }
-        lineStatusText.setText(lineText);
+        lineStatusText.setText(Problem.updateLineLabel(line));
     }
 
     private void freeze() {
