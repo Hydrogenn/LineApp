@@ -84,11 +84,16 @@ class Problem implements Serializable {
     @Override
     public boolean equals(Object o) {
         if (o instanceof Problem) {
-            Problem problem = (Problem) o;
-            return problem.getName().equals(this.getName()) &&
-                    problem.getProject().equals(this.getProject()) &&
-                    problem.getProblem().equals(this.getProject());
+            Problem otherProblem = (Problem) o;
+            return otherProblem.getName().equals(getName()) &&
+                    otherProblem.getProject().equals(getProject()) &&
+                    otherProblem.getProblem().equals(getProblem());
         } else return false;
+    }
+    
+    @Override
+    public int hashCode() {
+        return getName().hashCode() + getProject().hashCode() + getProblem().hashCode();
     }
     
 }

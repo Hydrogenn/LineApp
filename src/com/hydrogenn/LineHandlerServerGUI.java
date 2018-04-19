@@ -22,6 +22,7 @@ public class LineHandlerServerGUI extends javax.swing.JFrame {
     /** Creates new form GraphicsHandler */
     public LineHandlerServerGUI() {
         LineHandlerServer server = new LineHandlerServer(this);
+        
         server.start();
         initComponents();
         updateLineLabel();
@@ -157,13 +158,15 @@ public class LineHandlerServerGUI extends javax.swing.JFrame {
                 problemNames.add(problem.name);
             });
             if (problemNames.contains(solveTypeField.getText())) {
-                problemList.stream().filter((problem) -> (problem.name.equalsIgnoreCase(solveTypeField.getText()))).forEach((problem) -> {
-                    problemList.remove(problem);
-                    updateLineLabel();
-                    return;
-                });
+                for (Problem problem : problemList) {
+                    if (problem.getName().equalsIgnoreCase(solveTypeField.getText())) {
+                        problemList.remove(problem);
+                        updateLineLabel();
+                        return;
+                    }
+                }
             } else {
-                log("That name doesn't exist! (It has to be exactly the same.)");
+                log("That name doesn't exist! (It has to be the exact name, ignoring case.)");
             }
         } else {
             log("There's nothing to remove!");
@@ -174,13 +177,15 @@ public class LineHandlerServerGUI extends javax.swing.JFrame {
         if (problemList.size() > 0) {
             List<String> problemNames = Problem.getProjects(problemList);
             if (problemNames.contains(solveTypeField.getText())) {
-                problemList.stream().filter((problem) -> (problem.project.equalsIgnoreCase(solveTypeField.getText()))).forEach((problem) -> {
-                    problemList.remove(problem);
-                    updateLineLabel();
-                    return;
-                });
+                for (Problem problem : problemList) {
+                    if (problem.getProject().equalsIgnoreCase(solveTypeField.getText())) {
+                        problemList.remove(problem);
+                        updateLineLabel();
+                        return;
+                    }
+                }
             } else {
-                log("That project doesn't exist! (It has to be exactly the same.)");
+                log("That project doesn't exist! (It has to be the exact name, ignoring case.)");
             }
         } else {
             log("There's nothing to remove!");
@@ -213,22 +218,6 @@ public class LineHandlerServerGUI extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(LineHandlerServerGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
