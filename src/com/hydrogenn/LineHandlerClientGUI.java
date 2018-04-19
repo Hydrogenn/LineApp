@@ -10,14 +10,12 @@ import java.awt.Component;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.Timer;
 
 /**
  *
  * @author Joshua Davenport
  */
 public class LineHandlerClientGUI extends javax.swing.JFrame {
-    private final static int TIME = 1;
 
     List<Problem> line = new ArrayList<>();
     
@@ -25,7 +23,6 @@ public class LineHandlerClientGUI extends javax.swing.JFrame {
     
     //private final static int TIME = 5000;
     
-    private Timer timer;
     /** Creates new form LineHandlerClient */
     public LineHandlerClientGUI() {
         initComponents();
@@ -410,12 +407,6 @@ public class LineHandlerClientGUI extends javax.swing.JFrame {
     
     void updateLineText() {
         lineStatusText.setText(Problem.updateLineLabel(line));
-    }
-
-    private void freeze() {
-        helpButton.setEnabled(false);
-        timer.start();
-        helpButton.setEnabled(true);
     }
     
 }
