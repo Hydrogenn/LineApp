@@ -294,7 +294,7 @@ public class LineHandlerClientGUI extends javax.swing.JFrame {
         refreshButton.setEnabled(true);
 
         lockInformation(true);
-        queue.setText(position);
+        queue.setText(Integer.toString(position));
 
 
     }//GEN-LAST:event_helpButtonActionPerformed
