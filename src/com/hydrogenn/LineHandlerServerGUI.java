@@ -10,6 +10,7 @@ import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import javax.swing.DefaultListModel;
 
 /**
  *
@@ -18,6 +19,7 @@ import java.util.List;
 public class LineHandlerServerGUI extends javax.swing.JFrame {
 
     private List<Problem> problemList = new ArrayList<>();
+    private DefaultListModel listModel = new DefaultListModel();
 
     /** Creates new form GraphicsHandler */
     public LineHandlerServerGUI() {
@@ -25,6 +27,8 @@ public class LineHandlerServerGUI extends javax.swing.JFrame {
         
         server.start();
         initComponents();
+        
+        lineList.setModel(listModel);
         updateLineLabel();
     }
 
@@ -37,23 +41,14 @@ public class LineHandlerServerGUI extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        solveTopButton = new javax.swing.JButton();
         solveTypeField = new javax.swing.JTextField();
         solveProblemButton = new javax.swing.JButton();
-        solveNameButton = new javax.swing.JButton();
         logPanel = new javax.swing.JPanel();
         logLabel = new javax.swing.JLabel();
         linePane = new javax.swing.JScrollPane();
-        lineLabel = new javax.swing.JLabel();
+        lineList = new javax.swing.JList<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        solveTopButton.setText("Solve Top");
-        solveTopButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                solveTopButtonActionPerformed(evt);
-            }
-        });
 
         solveTypeField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -65,13 +60,6 @@ public class LineHandlerServerGUI extends javax.swing.JFrame {
         solveProblemButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 solveProblemButtonActionPerformed(evt);
-            }
-        });
-
-        solveNameButton.setText("Solve Name");
-        solveNameButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                solveNameButtonActionPerformed(evt);
             }
         });
 
@@ -96,9 +84,12 @@ public class LineHandlerServerGUI extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        lineLabel.setText("This text should update automatically. If it doesn't, it's an error.");
-        lineLabel.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-        linePane.setViewportView(lineLabel);
+        lineList.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "If you see this, it's an error!" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        linePane.setViewportView(lineList);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -109,14 +100,11 @@ public class LineHandlerServerGUI extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(logPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(solveTopButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(solveTypeField)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(solveProblemButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(solveNameButton))
-                    .addComponent(linePane, javax.swing.GroupLayout.DEFAULT_SIZE, 604, Short.MAX_VALUE))
+                        .addComponent(solveTypeField, javax.swing.GroupLayout.DEFAULT_SIZE, 205, Short.MAX_VALUE)
+                        .addGap(261, 261, 261))
+                    .addComponent(linePane))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -124,15 +112,13 @@ public class LineHandlerServerGUI extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(solveTopButton)
                     .addComponent(solveTypeField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(solveProblemButton)
-                    .addComponent(solveNameButton))
+                    .addComponent(solveProblemButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(logPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(linePane, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(linePane, javax.swing.GroupLayout.DEFAULT_SIZE, 413, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
@@ -141,37 +127,6 @@ public class LineHandlerServerGUI extends javax.swing.JFrame {
     private void solveTypeFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_solveTypeFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_solveTypeFieldActionPerformed
-
-    private void solveTopButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_solveTopButtonActionPerformed
-        if (problemList.size() > 0) {
-            problemList.remove(0);
-            updateLineLabel();
-        } else {
-            log("There's nothing to remove!");
-        }
-    }//GEN-LAST:event_solveTopButtonActionPerformed
-
-    private void solveNameButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_solveNameButtonActionPerformed
-        if (problemList.size() > 0) {
-            List<String> problemNames = new ArrayList<>();
-            problemList.stream().forEach((problem) -> {
-                problemNames.add(problem.name);
-            });
-            if (problemNames.contains(solveTypeField.getText())) {
-                for (Problem problem : problemList) {
-                    if (problem.getName().equalsIgnoreCase(solveTypeField.getText())) {
-                        problemList.remove(problem);
-                        updateLineLabel();
-                        return;
-                    }
-                }
-            } else {
-                log("That name doesn't exist! (It has to be the exact name, ignoring case.)");
-            }
-        } else {
-            log("There's nothing to remove!");
-        }
-    }//GEN-LAST:event_solveNameButtonActionPerformed
 
     private void solveProblemButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_solveProblemButtonActionPerformed
         if (problemList.size() > 0) {
@@ -227,13 +182,11 @@ public class LineHandlerServerGUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel lineLabel;
+    private javax.swing.JList<String> lineList;
     private javax.swing.JScrollPane linePane;
     private javax.swing.JLabel logLabel;
     private javax.swing.JPanel logPanel;
-    private javax.swing.JButton solveNameButton;
     private javax.swing.JButton solveProblemButton;
-    private javax.swing.JButton solveTopButton;
     private javax.swing.JTextField solveTypeField;
     // End of variables declaration//GEN-END:variables
   
@@ -257,7 +210,9 @@ public class LineHandlerServerGUI extends javax.swing.JFrame {
     }
 
     public void updateLineLabel() {
-        lineLabel.setText(Problem.updateLineLabel(problemList));
+        for (String listItem : Problem.updateLineLabel(problemList)) {
+            lineList.setText(Problem.updateLineLabel(problemList));
+        }
     }
 
 }

@@ -28,15 +28,12 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="logPanel" max="32767" attributes="0"/>
                   <Group type="102" attributes="0">
-                      <Component id="solveTopButton" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="solveTypeField" max="32767" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
                       <Component id="solveProblemButton" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="solveNameButton" min="-2" max="-2" attributes="0"/>
+                      <Component id="solveTypeField" pref="205" max="32767" attributes="0"/>
+                      <EmptySpace min="-2" pref="261" max="-2" attributes="0"/>
                   </Group>
-                  <Component id="linePane" alignment="0" pref="604" max="32767" attributes="0"/>
+                  <Component id="linePane" alignment="0" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -47,29 +44,19 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="solveTopButton" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="solveTypeField" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="solveProblemButton" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="solveNameButton" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="logPanel" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="linePane" min="-2" pref="267" max="-2" attributes="0"/>
-              <EmptySpace max="32767" attributes="0"/>
+              <Component id="linePane" pref="413" max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JButton" name="solveTopButton">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Solve Top"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="solveTopButtonActionPerformed"/>
-      </Events>
-    </Component>
     <Component class="javax.swing.JTextField" name="solveTypeField">
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="solveTypeFieldActionPerformed"/>
@@ -81,14 +68,6 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="solveProblemButtonActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JButton" name="solveNameButton">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Solve Name"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="solveNameButtonActionPerformed"/>
       </Events>
     </Component>
     <Container class="javax.swing.JPanel" name="logPanel">
@@ -126,14 +105,23 @@
       </SubComponents>
     </Container>
     <Container class="javax.swing.JScrollPane" name="linePane">
+      <AuxValues>
+        <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+      </AuxValues>
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
-        <Component class="javax.swing.JLabel" name="lineLabel">
+        <Component class="javax.swing.JList" name="lineList">
           <Properties>
-            <Property name="text" type="java.lang.String" value="This text should update automatically. If it doesn&apos;t, it&apos;s an error."/>
-            <Property name="verticalAlignment" type="int" value="1"/>
+            <Property name="model" type="javax.swing.ListModel" editor="org.netbeans.modules.form.editors2.ListModelEditor">
+              <StringArray count="1">
+                <StringItem index="0" value="If you see this, it&apos;s an error!"/>
+              </StringArray>
+            </Property>
           </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+          </AuxValues>
         </Component>
       </SubComponents>
     </Container>
