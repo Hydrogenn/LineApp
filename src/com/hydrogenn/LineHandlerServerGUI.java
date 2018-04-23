@@ -210,9 +210,10 @@ public class LineHandlerServerGUI extends javax.swing.JFrame {
     }
 
     public void updateLineLabel() {
-        for (String listItem : Problem.updateLineLabel(problemList)) {
-            lineList.setText(Problem.updateLineLabel(problemList));
-        }
+//        for (String listItem : Problem.updateLineLabel(problemList)) {
+//            lineList.setText(Problem.updateLineLabel(problemList));
+//        }
+//TODO
     }
 
 }
