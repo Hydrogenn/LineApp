@@ -7,6 +7,11 @@
 package com.hydrogenn;
 
 import java.awt.Component;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -60,8 +65,7 @@ public class LineHandlerClientGUI extends javax.swing.JFrame {
         lineStatusText = new javax.swing.JLabel();
         refreshButton = new javax.swing.JButton();
         cancelButton = new javax.swing.JButton();
-        exitButton = new javax.swing.JButton();
-        queue = new javax.swing.JLabel();
+        saveInfo = new javax.swing.JButton();
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -119,11 +123,9 @@ public class LineHandlerClientGUI extends javax.swing.JFrame {
                     .addComponent(problemLabel))
                 .addGap(23, 23, 23)
                 .addGroup(problemPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(problemPanelLayout.createSequentialGroup()
-                        .addComponent(problemTextField)
-                        .addGap(8, 8, 8))
                     .addComponent(nameTextField)
-                    .addComponent(projectTextField))
+                    .addComponent(projectTextField)
+                    .addComponent(problemTextField))
                 .addContainerGap())
         );
         problemPanelLayout.setVerticalGroup(
@@ -139,7 +141,8 @@ public class LineHandlerClientGUI extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(problemPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(problemTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(problemLabel)))
+                    .addComponent(problemLabel))
+                .addGap(0, 9, Short.MAX_VALUE))
         );
 
         customServerPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Server IP Address"));
@@ -213,15 +216,12 @@ public class LineHandlerClientGUI extends javax.swing.JFrame {
             }
         });
 
-        exitButton.setText("Exit");
-        exitButton.addActionListener(new java.awt.event.ActionListener() {
+        saveInfo.setText("Save Info");
+        saveInfo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                exitButtonActionPerformed(evt);
+                saveInfoActionPerformed(evt);
             }
         });
-
-        queue.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
-        queue.setText("Queue: ");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -243,15 +243,11 @@ public class LineHandlerClientGUI extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(cancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(exitButton)))
+                        .addComponent(saveInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addGap(12, 12, 12)
-                .addComponent(queue, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {cancelButton, exitButton, helpButton, refreshButton});
+        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {cancelButton, helpButton, refreshButton, saveInfo});
 
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -262,16 +258,14 @@ public class LineHandlerClientGUI extends javax.swing.JFrame {
                 .addComponent(serverCheckbox)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(customServerPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(queue)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 89, Short.MAX_VALUE)
-                .addComponent(lineStatusPane, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lineStatusPane, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(refreshButton)
                     .addComponent(helpButton)
                     .addComponent(cancelButton)
-                    .addComponent(exitButton))
+                    .addComponent(saveInfo))
                 .addContainerGap())
         );
 
@@ -294,7 +288,7 @@ public class LineHandlerClientGUI extends javax.swing.JFrame {
         refreshButton.setEnabled(true);
 
         lockInformation(true);
-        queue.setText(Integer.toString(position));
+        //queue.setText(Integer.toString(position));
 
 
     }//GEN-LAST:event_helpButtonActionPerformed
@@ -343,7 +337,7 @@ public class LineHandlerClientGUI extends javax.swing.JFrame {
         refreshButton.setEnabled(false);
 
         lockInformation(false);
-        queue.setText(" ");
+        //queue.setText(" ");
 
     }//GEN-LAST:event_cancelButtonActionPerformed
 
@@ -364,6 +358,27 @@ public class LineHandlerClientGUI extends javax.swing.JFrame {
         lockInformation(false);
         System.exit(0);
     }//GEN-LAST:event_exitButtonActionPerformed
+
+    private void saveInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveInfoActionPerformed
+        String fileName = "info.txt"; 
+
+        try {
+            FileWriter fileWriter = new FileWriter(fileName);
+            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+            // Wrap FileWriter to write strings
+
+            bufferedWriter.write(nameTextField.getText());
+            bufferedWriter.newLine(); 
+            bufferedWriter.write(ipTextField.getText());
+            bufferedWriter.newLine(); 
+            bufferedWriter.write(portTextField.getText());
+            bufferedWriter.newLine(); 
+            bufferedWriter.close(); 
+        } catch (IOException ex) {
+            System.out.println("Error writing to file '" + fileName + "'");
+        }
+  
+    }//GEN-LAST:event_saveInfoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -404,7 +419,6 @@ public class LineHandlerClientGUI extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cancelButton;
     private javax.swing.JPanel customServerPanel;
-    private javax.swing.JButton exitButton;
     private javax.swing.JButton helpButton;
     private javax.swing.JLabel ipLabel;
     private javax.swing.JTextField ipTextField;
@@ -420,8 +434,8 @@ public class LineHandlerClientGUI extends javax.swing.JFrame {
     private javax.swing.JTextField problemTextField;
     private javax.swing.JLabel projectLabel;
     private javax.swing.JTextField projectTextField;
-    private javax.swing.JLabel queue;
     private javax.swing.JButton refreshButton;
+    private javax.swing.JButton saveInfo;
     private javax.swing.JCheckBox serverCheckbox;
     // End of variables declaration//GEN-END:variables
 
