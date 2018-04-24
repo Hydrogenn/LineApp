@@ -9,7 +9,9 @@ package com.hydrogenn;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeCellRenderer;
+import javax.swing.tree.DefaultTreeModel;
 
 /**
  *
@@ -18,6 +20,8 @@ import javax.swing.tree.DefaultTreeCellRenderer;
 public class LineHandlerServerGUI extends javax.swing.JFrame {
 
     private List<Problem> problemList = new ArrayList<>();
+    DefaultTreeModel model;
+    DefaultMutableTreeNode root;
 
     /** Creates new form GraphicsHandler */
     public LineHandlerServerGUI() {
@@ -29,7 +33,10 @@ public class LineHandlerServerGUI extends javax.swing.JFrame {
         updateLineLabel();
         
         DefaultTreeCellRenderer renderer = generateTreeRenderer();
+        
         problemTree.setCellRenderer(renderer);
+        model = (DefaultTreeModel) problemTree.getModel();
+        root = (DefaultMutableTreeNode) model.getRoot();
         
     }
 
@@ -45,9 +52,9 @@ public class LineHandlerServerGUI extends javax.swing.JFrame {
         solveProblemButton = new javax.swing.JButton();
         logLabel = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        addProjectButton = new javax.swing.JButton();
+        saveButton = new javax.swing.JButton();
+        loadButton = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         problemTree = new javax.swing.JTree();
 
@@ -67,11 +74,11 @@ public class LineHandlerServerGUI extends javax.swing.JFrame {
 
         jTextField1.setText("PrintChallenge0");
 
-        jButton1.setText("Add Project");
+        addProjectButton.setText("Add Project");
 
-        jButton2.setText("Save Class");
+        saveButton.setText("Save Class");
 
-        jButton3.setText("Load Class");
+        loadButton.setText("Load Class");
 
         javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("No projects!");
         problemTree.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
@@ -87,20 +94,20 @@ public class LineHandlerServerGUI extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton1)
+                        .addComponent(addProjectButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(solveProblemButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton2)
+                        .addComponent(saveButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton3)
+                        .addComponent(loadButton)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(logLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addContainerGap())
         );
 
-        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jButton1, jButton2, jButton3, solveProblemButton});
+        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {addProjectButton, loadButton, saveButton, solveProblemButton});
 
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -108,9 +115,9 @@ public class LineHandlerServerGUI extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(solveProblemButton)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3)
+                    .addComponent(addProjectButton)
+                    .addComponent(saveButton)
+                    .addComponent(loadButton)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -123,7 +130,7 @@ public class LineHandlerServerGUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void solveProblemButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_solveProblemButtonActionPerformed
-        problemTree;
+        //TODO
     }//GEN-LAST:event_solveProblemButtonActionPerformed
 
     /**
@@ -161,13 +168,13 @@ public class LineHandlerServerGUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton addProjectButton;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JButton loadButton;
     private javax.swing.JLabel logLabel;
     private javax.swing.JTree problemTree;
+    private javax.swing.JButton saveButton;
     private javax.swing.JButton solveProblemButton;
     // End of variables declaration//GEN-END:variables
   
@@ -191,11 +198,7 @@ public class LineHandlerServerGUI extends javax.swing.JFrame {
     }
 
     public void updateLineLabel() {
-        listModel.clear();
-        for (Problem problem : problemList) {
-            listModel.addElement(problem);
-        }
-        
+        //TODO
     }
 
     private DefaultTreeCellRenderer generateTreeRenderer() {

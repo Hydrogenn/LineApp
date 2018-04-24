@@ -61,11 +61,10 @@ public class LineHandlerClientGUI extends javax.swing.JFrame {
         portTextField = new javax.swing.JTextField();
         portLabel = new javax.swing.JLabel();
         serverCheckbox = new javax.swing.JCheckBox();
-        lineStatusPane = new javax.swing.JScrollPane();
-        lineStatusText = new javax.swing.JLabel();
         refreshButton = new javax.swing.JButton();
         cancelButton = new javax.swing.JButton();
-        saveInfo = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        problemTree = new javax.swing.JTree();
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -123,9 +122,11 @@ public class LineHandlerClientGUI extends javax.swing.JFrame {
                     .addComponent(problemLabel))
                 .addGap(23, 23, 23)
                 .addGroup(problemPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(problemPanelLayout.createSequentialGroup()
+                        .addComponent(problemTextField)
+                        .addGap(8, 8, 8))
                     .addComponent(nameTextField)
-                    .addComponent(projectTextField)
-                    .addComponent(problemTextField))
+                    .addComponent(projectTextField))
                 .addContainerGap())
         );
         problemPanelLayout.setVerticalGroup(
@@ -141,8 +142,7 @@ public class LineHandlerClientGUI extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(problemPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(problemTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(problemLabel))
-                .addGap(0, 9, Short.MAX_VALUE))
+                    .addComponent(problemLabel)))
         );
 
         customServerPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Server IP Address"));
@@ -196,12 +196,6 @@ public class LineHandlerClientGUI extends javax.swing.JFrame {
             }
         });
 
-        lineStatusPane.setToolTipText("");
-
-        lineStatusText.setText("You are not in line.");
-        lineStatusText.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-        lineStatusPane.setViewportView(lineStatusText);
-
         refreshButton.setText("Refresh");
         refreshButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -216,12 +210,9 @@ public class LineHandlerClientGUI extends javax.swing.JFrame {
             }
         });
 
-        saveInfo.setText("Save Info");
-        saveInfo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                saveInfoActionPerformed(evt);
-            }
-        });
+        javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("You are not in line.");
+        problemTree.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
+        jScrollPane1.setViewportView(problemTree);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -230,28 +221,28 @@ public class LineHandlerClientGUI extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(customServerPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(problemPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lineStatusPane)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(serverCheckbox)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(refreshButton, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(helpButton, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(cancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(saveInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(111, 111, 111))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(serverCheckbox)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(customServerPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(problemPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
-        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {cancelButton, helpButton, refreshButton, saveInfo});
+        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {cancelButton, helpButton, refreshButton});
 
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(problemPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -259,13 +250,12 @@ public class LineHandlerClientGUI extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(customServerPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(lineStatusPane, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(refreshButton)
                     .addComponent(helpButton)
-                    .addComponent(cancelButton)
-                    .addComponent(saveInfo))
+                    .addComponent(cancelButton))
                 .addContainerGap())
         );
 
@@ -423,8 +413,7 @@ public class LineHandlerClientGUI extends javax.swing.JFrame {
     private javax.swing.JLabel ipLabel;
     private javax.swing.JTextField ipTextField;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane lineStatusPane;
-    private javax.swing.JLabel lineStatusText;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel nameLabel;
     private javax.swing.JTextField nameTextField;
     private javax.swing.JLabel portLabel;
@@ -432,10 +421,10 @@ public class LineHandlerClientGUI extends javax.swing.JFrame {
     private javax.swing.JLabel problemLabel;
     private javax.swing.JPanel problemPanel;
     private javax.swing.JTextField problemTextField;
+    private javax.swing.JTree problemTree;
     private javax.swing.JLabel projectLabel;
     private javax.swing.JTextField projectTextField;
     private javax.swing.JButton refreshButton;
-    private javax.swing.JButton saveInfo;
     private javax.swing.JCheckBox serverCheckbox;
     // End of variables declaration//GEN-END:variables
 
@@ -448,7 +437,7 @@ public class LineHandlerClientGUI extends javax.swing.JFrame {
     }
 
     void updateLineText() {
-        lineStatusText.setText(Problem.updateLineLabel(line));
+        //TODO
     }
 
     void lockInformation(boolean locked) {
