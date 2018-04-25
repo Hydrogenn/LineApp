@@ -9,8 +9,6 @@ package com.hydrogenn;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.tree.DefaultMutableTreeNode;
-import javax.swing.tree.DefaultTreeCellRenderer;
 import javax.swing.tree.DefaultTreeModel;
 
 /**
@@ -19,24 +17,12 @@ import javax.swing.tree.DefaultTreeModel;
  */
 public class LineHandlerServerGUI extends javax.swing.JFrame {
 
-    private List<Problem> problemList = new ArrayList<>();
-    DefaultTreeModel model;
-    DefaultMutableTreeNode root;
-
     /** Creates new form GraphicsHandler */
     public LineHandlerServerGUI() {
         LineHandlerServer server = new LineHandlerServer(this);
         
         server.start();
         initComponents();
-        
-        updateLineLabel();
-        
-        DefaultTreeCellRenderer renderer = generateTreeRenderer();
-        
-        problemTree.setCellRenderer(renderer);
-        model = (DefaultTreeModel) problemTree.getModel();
-        root = (DefaultMutableTreeNode) model.getRoot();
         
     }
 
@@ -55,8 +41,8 @@ public class LineHandlerServerGUI extends javax.swing.JFrame {
         addProjectButton = new javax.swing.JButton();
         saveButton = new javax.swing.JButton();
         loadButton = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        problemTree = new javax.swing.JTree();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        lineTree = new com.hydrogenn.LineTree();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -80,9 +66,7 @@ public class LineHandlerServerGUI extends javax.swing.JFrame {
 
         loadButton.setText("Load Class");
 
-        javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("No projects!");
-        problemTree.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
-        jScrollPane1.setViewportView(problemTree);
+        jScrollPane2.setViewportView(lineTree);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -91,6 +75,8 @@ public class LineHandlerServerGUI extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2)
+                    .addComponent(logLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -101,9 +87,7 @@ public class LineHandlerServerGUI extends javax.swing.JFrame {
                         .addComponent(saveButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(loadButton)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(logLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -120,7 +104,7 @@ public class LineHandlerServerGUI extends javax.swing.JFrame {
                     .addComponent(loadButton)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(logLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
@@ -130,7 +114,7 @@ public class LineHandlerServerGUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void solveProblemButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_solveProblemButtonActionPerformed
-        //TODO
+        lineTree.resolveProblems();
     }//GEN-LAST:event_solveProblemButtonActionPerformed
 
     /**
@@ -169,11 +153,11 @@ public class LineHandlerServerGUI extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addProjectButton;
-    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextField jTextField1;
+    private com.hydrogenn.LineTree lineTree;
     private javax.swing.JButton loadButton;
     private javax.swing.JLabel logLabel;
-    private javax.swing.JTree problemTree;
     private javax.swing.JButton saveButton;
     private javax.swing.JButton solveProblemButton;
     // End of variables declaration//GEN-END:variables
@@ -184,29 +168,15 @@ public class LineHandlerServerGUI extends javax.swing.JFrame {
     }
 
     void addLine(Problem problem) {
-        problemList.add(problem);
-        updateLineLabel();
+        lineTree.addProblem(problem);
     }
     
     void removeLine(Problem problem) {
-        problemList.remove(problem);
-        updateLineLabel();
+        lineTree.resolveProblems();
     }
-
-    List<Problem> getList() {
-        return problemList;
-    }
-
-    public void updateLineLabel() {
-        //TODO
-    }
-
-    private DefaultTreeCellRenderer generateTreeRenderer() {
-        DefaultTreeCellRenderer renderer = new DefaultTreeCellRenderer();
-        renderer.setOpenIcon(null);
-        renderer.setClosedIcon(null);
-        renderer.setLeafIcon(null);
-        return renderer;
+    
+    DefaultTreeModel getProblems() {
+        return lineTree.model;
     }
 
 }

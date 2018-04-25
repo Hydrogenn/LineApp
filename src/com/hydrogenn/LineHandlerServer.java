@@ -65,13 +65,13 @@ public class LineHandlerServer extends Thread {
                 switch (messageType) {
 
                     case CLIENT_PROBLEM:
-                        getProblem(server);
+                        getProblem();
                         break;
                     case CLIENT_SOLVED:
-                        removeProblem(server);
+                        removeProblem();
                         break;
                     case CLIENT_UPDATE:
-                        sendLine(server);
+                        sendProblems();
                         break;
                     case CLIENT_END:
                         break infoLoop;
@@ -88,7 +88,7 @@ public class LineHandlerServer extends Thread {
         }
     }
     
-    private void getProblem(Socket server) throws IOException, ClassNotFoundException {
+    private void getProblem() throws IOException, ClassNotFoundException {
         
         Problem problem = (Problem) in.readObject();
 
@@ -96,7 +96,7 @@ public class LineHandlerServer extends Thread {
         
     }
     
-    private void removeProblem(Socket server) throws IOException, ClassNotFoundException {
+    private void removeProblem() throws IOException, ClassNotFoundException {
 
         Problem problem;
 
@@ -106,9 +106,9 @@ public class LineHandlerServer extends Thread {
         
     }
     
-    private void sendLine(Socket server) throws IOException {
+    private void sendProblems() throws IOException {
         
-        out.writeObject(gui.getList());
+        out.writeObject(gui.getProblems());
         
     }
     

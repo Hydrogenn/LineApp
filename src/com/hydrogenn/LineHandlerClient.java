@@ -13,6 +13,7 @@ import java.net.Socket;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.tree.DefaultTreeModel;
 
 /**
  *
@@ -84,7 +85,7 @@ public class LineHandlerClient {
             
             out.writeObject(Protocol.CLIENT_UPDATE);
             
-            gui.setLine((List<Problem>) in.readObject());
+            gui.setLine((DefaultTreeModel) in.readObject());
             
         } catch (IOException | ClassNotFoundException ex) {
             gui.log("Could not find where you are in the line!");
