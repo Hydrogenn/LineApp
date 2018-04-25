@@ -7,10 +7,6 @@
 package com.hydrogenn;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import javax.swing.DefaultListModel;
 
 /**
  *
@@ -48,16 +44,6 @@ class Problem implements Serializable {
 
     public void setProblem(String problem) {
         this.problem = problem;
-    }
-    
-    public static List<String> getProjects(List<Problem> problemList) {
-        List<String> projects = new ArrayList<>();
-        for (Problem problem : problemList) {
-            if (!projects.contains(problem.getProject())) {
-                projects.add(problem.getProject());
-            }
-        }
-        return projects;
     }
     
     @Override

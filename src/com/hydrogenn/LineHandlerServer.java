@@ -81,9 +81,7 @@ public class LineHandlerServer extends Thread {
 
             server.close();
 
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(LineHandlerServer.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
+        } catch (IOException | ClassNotFoundException ex) {
             Logger.getLogger(LineHandlerServer.class.getName()).log(Level.SEVERE, null, ex);
         }
     }

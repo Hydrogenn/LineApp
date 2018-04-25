@@ -7,8 +7,6 @@
 package com.hydrogenn;
 
 import java.awt.Color;
-import java.util.ArrayList;
-import java.util.List;
 import javax.swing.tree.DefaultTreeModel;
 
 /**
@@ -16,7 +14,7 @@ import javax.swing.tree.DefaultTreeModel;
  * @author Joshua Davenport
  */
 public class LineHandlerServerGUI extends javax.swing.JFrame {
-
+    
     /** Creates new form GraphicsHandler */
     public LineHandlerServerGUI() {
         LineHandlerServer server = new LineHandlerServer(this);
@@ -37,7 +35,7 @@ public class LineHandlerServerGUI extends javax.swing.JFrame {
 
         solveProblemButton = new javax.swing.JButton();
         logLabel = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        projectName = new javax.swing.JTextField();
         addProjectButton = new javax.swing.JButton();
         saveButton = new javax.swing.JButton();
         loadButton = new javax.swing.JButton();
@@ -58,7 +56,7 @@ public class LineHandlerServerGUI extends javax.swing.JFrame {
         logLabel.setText("LineMaster™");
         logLabel.setVerticalAlignment(javax.swing.SwingConstants.TOP);
 
-        jTextField1.setText("PrintChallenge0");
+        projectName.setText("PrintChallenge0");
 
         addProjectButton.setText("Add Project");
 
@@ -78,7 +76,7 @@ public class LineHandlerServerGUI extends javax.swing.JFrame {
                     .addComponent(jScrollPane2)
                     .addComponent(logLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(projectName, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(addProjectButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -102,7 +100,7 @@ public class LineHandlerServerGUI extends javax.swing.JFrame {
                     .addComponent(addProjectButton)
                     .addComponent(saveButton)
                     .addComponent(loadButton)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(projectName, javax.swing.GroupLayout.DEFAULT_SIZE, 29, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -154,10 +152,10 @@ public class LineHandlerServerGUI extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addProjectButton;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextField jTextField1;
     private com.hydrogenn.LineTree lineTree;
     private javax.swing.JButton loadButton;
     private javax.swing.JLabel logLabel;
+    private javax.swing.JTextField projectName;
     private javax.swing.JButton saveButton;
     private javax.swing.JButton solveProblemButton;
     // End of variables declaration//GEN-END:variables

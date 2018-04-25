@@ -6,6 +6,9 @@
 
 package com.hydrogenn;
 
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JTree;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeCellRenderer;
@@ -16,7 +19,9 @@ import javax.swing.tree.TreePath;
  *
  * @author Joshua Davenport
  */
-public class LineTree extends JTree {
+public class LineTree extends JTree implements Serializable {
+    
+    List<String> problems = new ArrayList<>();
     
     DefaultTreeModel model;
     DefaultMutableTreeNode root;
@@ -33,8 +38,9 @@ public class LineTree extends JTree {
         
     }
     
-    public void addProblem(Object o) {
-        root.add(new DefaultMutableTreeNode(o));
+    public void addProblem(Problem problem) {
+        //TODO add problem to correct project
+        root.add(new DefaultMutableTreeNode(problem));
     }
     
     public void resolveProblems() {
