@@ -12,7 +12,7 @@ import java.io.Serializable;
  *
  * @author Joshua Davenport
  */
-class Problem implements Serializable {
+public class Problem implements Serializable {
     
     String name, project, problem;
     

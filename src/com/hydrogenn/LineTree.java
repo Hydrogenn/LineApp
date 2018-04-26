@@ -8,6 +8,7 @@ package com.hydrogenn;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import javax.swing.JTree;
 import javax.swing.tree.DefaultMutableTreeNode;
@@ -21,7 +22,7 @@ import javax.swing.tree.TreePath;
  */
 public class LineTree extends JTree implements Serializable {
     
-    List<String> problems = new ArrayList<>();
+    HashMap<String, DefaultMutableTreeNode> projects = new HashMap<>();
     
     DefaultTreeModel model;
     DefaultMutableTreeNode root;
@@ -38,9 +39,20 @@ public class LineTree extends JTree implements Serializable {
         
     }
     
+    public void addProject(String project) {
+        DefaultMutableTreeNode projectNode = new DefaultMutableTreeNode(project);
+        root.add(projectNode);
+        projects.put(project, projectNode);
+    }
+    
     public void addProblem(Problem problem) {
         //TODO add problem to correct project
-        root.add(new DefaultMutableTreeNode(problem));
+        DefaultMutableTreeNode problemNode = new DefaultMutableTreeNode(problem);
+        projects.get(problem.getProject()).add(problemNode);
+    }
+    
+    public void recallProblem(Problem problem) {
+        projects.get(problem.getProject()).remove(new DefaultMutableTreeNode(problem));
     }
     
     public void resolveProblems() {
