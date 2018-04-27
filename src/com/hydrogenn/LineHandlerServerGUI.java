@@ -59,6 +59,11 @@ public class LineHandlerServerGUI extends javax.swing.JFrame {
         projectName.setText("PrintChallenge0");
 
         addProjectButton.setText("Add Project");
+        addProjectButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addProjectButtonActionPerformed(evt);
+            }
+        });
 
         saveButton.setText("Save Class");
 
@@ -95,12 +100,13 @@ public class LineHandlerServerGUI extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(solveProblemButton)
-                    .addComponent(addProjectButton)
-                    .addComponent(saveButton)
-                    .addComponent(loadButton)
-                    .addComponent(projectName, javax.swing.GroupLayout.DEFAULT_SIZE, 29, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(projectName)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(solveProblemButton)
+                        .addComponent(addProjectButton)
+                        .addComponent(saveButton)
+                        .addComponent(loadButton)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -114,6 +120,10 @@ public class LineHandlerServerGUI extends javax.swing.JFrame {
     private void solveProblemButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_solveProblemButtonActionPerformed
         lineTree.resolveProblems();
     }//GEN-LAST:event_solveProblemButtonActionPerformed
+
+    private void addProjectButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addProjectButtonActionPerformed
+        lineTree.addProject(projectName.getText());
+    }//GEN-LAST:event_addProjectButtonActionPerformed
 
     /**
      * @param args the command line arguments

@@ -7,9 +7,7 @@
 package com.hydrogenn;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import javax.swing.JTree;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeCellRenderer;
@@ -26,6 +24,7 @@ public class LineTree extends JTree implements Serializable {
     
     DefaultTreeModel model;
     DefaultMutableTreeNode root;
+    DefaultMutableTreeNode other;
     
     public LineTree() {
         
@@ -35,7 +34,9 @@ public class LineTree extends JTree implements Serializable {
         
         model = (DefaultTreeModel) getModel();
         root =  new DefaultMutableTreeNode("Problems");
+        other = new DefaultMutableTreeNode("(Other)");
         model.setRoot(root);
+        root.add(other);
         
     }
     
@@ -43,16 +44,19 @@ public class LineTree extends JTree implements Serializable {
         DefaultMutableTreeNode projectNode = new DefaultMutableTreeNode(project);
         root.add(projectNode);
         projects.put(project, projectNode);
+        updateUI();
     }
     
     public void addProblem(Problem problem) {
         //TODO add problem to correct project
         DefaultMutableTreeNode problemNode = new DefaultMutableTreeNode(problem);
-        projects.get(problem.getProject()).add(problemNode);
+        projects.getOrDefault(problem.getProject(), other).add(problemNode);
+        updateUI();
     }
     
     public void recallProblem(Problem problem) {
-        projects.get(problem.getProject()).remove(new DefaultMutableTreeNode(problem));
+        projects.getOrDefault(problem.getProject(), other).remove(new DefaultMutableTreeNode(problem));
+        updateUI();
     }
     
     public void resolveProblems() {
@@ -60,6 +64,7 @@ public class LineTree extends JTree implements Serializable {
             DefaultMutableTreeNode node = (DefaultMutableTreeNode) (path.getLastPathComponent());
             model.removeNodeFromParent(node);
         }
+        updateUI();
     }
     
     private DefaultTreeCellRenderer generateTreeRenderer() {
