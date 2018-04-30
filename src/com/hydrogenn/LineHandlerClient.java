@@ -93,4 +93,18 @@ public class LineHandlerClient {
         
     }
     
+    public void getProjects() {
+        
+        try {
+            
+            out.writeObject(Protocol.CLIENT_PROJECTS);
+            
+            gui.setProjects((List<String>) in.readObject());
+        
+        } catch (IOException | ClassNotFoundException ex) {
+            gui.log("Could not find where you are in the line!");
+        }
+        
+    }
+    
 }

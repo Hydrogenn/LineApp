@@ -15,7 +15,8 @@ public enum Protocol {
     CLIENT_PROBLEM(ProtocolSide.CLIENT),
     CLIENT_SOLVED(ProtocolSide.CLIENT),
     CLIENT_UPDATE(ProtocolSide.CLIENT),
-    CLIENT_END(ProtocolSide.CLIENT);
+    CLIENT_END(ProtocolSide.CLIENT),
+    CLIENT_PROJECTS(ProtocolSide.CLIENT);
     
     ProtocolSide protocolSide;
     
