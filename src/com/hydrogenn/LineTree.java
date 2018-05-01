@@ -7,6 +7,7 @@
 package com.hydrogenn;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import javax.swing.JTree;
@@ -81,7 +82,7 @@ public class LineTree extends JTree implements Serializable {
     }
 
     List<String> getProjects() {
-        return (List<String>) projects.keySet();
+        return new ArrayList(projects.keySet());
     }
     
 }

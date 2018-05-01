@@ -12,6 +12,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.tree.DefaultTreeModel;
 
 /**
@@ -21,8 +22,6 @@ import javax.swing.tree.DefaultTreeModel;
 public class LineHandlerClientGUI extends javax.swing.JFrame {
 
     private boolean inLine = false;
-    
-    List<String> projects = new ArrayList<>();
     List<Problem> problems = new ArrayList<>();
 
     LineHandlerClient client = new LineHandlerClient(this);
@@ -490,7 +489,12 @@ public class LineHandlerClientGUI extends javax.swing.JFrame {
     }
     
     void setProjects(List<String> projects) {
-        this.projects = projects;
+        projectDropdown.setModel(new DefaultComboBoxModel(projects.toArray()));
+        if (projectDropdown.getItemCount() == 0) {
+            projectDropdown.addItem("Default (No projects available)");
+        } else {
+            projectDropdown.addItem("(Other)");
+        }
         lockInformation();
     }
 
