@@ -73,6 +73,9 @@ public class LineHandlerServer extends Thread {
                     case CLIENT_UPDATE:
                         sendProblems();
                         break;
+                    case CLIENT_PROJECTS:
+                        sendProjects();
+                        break;
                     case CLIENT_END:
                         break infoLoop;
                 }
@@ -107,6 +110,12 @@ public class LineHandlerServer extends Thread {
     private void sendProblems() throws IOException {
         
         out.writeObject(gui.getProblems());
+        
+    }
+
+    private void sendProjects() throws IOException {
+        
+        out.writeObject(gui.getProjects());
         
     }
     

@@ -8,6 +8,7 @@ package com.hydrogenn;
 
 import java.io.Serializable;
 import java.util.HashMap;
+import java.util.List;
 import javax.swing.JTree;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeCellRenderer;
@@ -77,6 +78,10 @@ public class LineTree extends JTree implements Serializable {
     
     public void updateModel(DefaultTreeModel model) {
         setModel(model);
+    }
+
+    List<String> getProjects() {
+        return (List<String>) projects.keySet();
     }
     
 }

@@ -7,6 +7,7 @@
 package com.hydrogenn;
 
 import java.awt.Color;
+import java.util.List;
 import javax.swing.tree.DefaultTreeModel;
 
 /**
@@ -185,6 +186,10 @@ public class LineHandlerServerGUI extends javax.swing.JFrame {
     
     DefaultTreeModel getProblems() {
         return lineTree.model;
+    }
+
+    public List<String> getProjects() {
+        return lineTree.getProjects();
     }
 
 }

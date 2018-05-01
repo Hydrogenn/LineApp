@@ -68,7 +68,7 @@ public class LineHandlerClientGUI extends javax.swing.JFrame {
         exitButton = new javax.swing.JButton();
         logLabel = new javax.swing.JLabel();
         projectsButton = new javax.swing.JButton();
-        jCheckBox1 = new javax.swing.JCheckBox();
+        multiProblemCheckbox = new javax.swing.JCheckBox();
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -231,11 +231,11 @@ public class LineHandlerClientGUI extends javax.swing.JFrame {
             }
         });
 
-        jCheckBox1.setText("Enable Multiple Problems");
-        jCheckBox1.setToolTipText("Check this if you have more than one problem.");
-        jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
+        multiProblemCheckbox.setText("Multiple Problems");
+        multiProblemCheckbox.setToolTipText("Check this if you have more than one problem.");
+        multiProblemCheckbox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox1ActionPerformed(evt);
+                multiProblemCheckboxActionPerformed(evt);
             }
         });
 
@@ -260,7 +260,7 @@ public class LineHandlerClientGUI extends javax.swing.JFrame {
                         .addComponent(exitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 6, Short.MAX_VALUE))
                     .addComponent(problemPanel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jCheckBox1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(multiProblemCheckbox, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING))
                 .addContainerGap())
         );
@@ -277,7 +277,7 @@ public class LineHandlerClientGUI extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(projectsButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jCheckBox1)
+                .addComponent(multiProblemCheckbox)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(problemPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -403,9 +403,9 @@ public class LineHandlerClientGUI extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_exitButtonActionPerformed
 
-    private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
+    private void multiProblemCheckboxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_multiProblemCheckboxActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jCheckBox1ActionPerformed
+    }//GEN-LAST:event_multiProblemCheckboxActionPerformed
 
     /**
      * @param args the command line arguments
@@ -450,11 +450,11 @@ public class LineHandlerClientGUI extends javax.swing.JFrame {
     private javax.swing.JButton helpButton;
     private javax.swing.JLabel ipLabel;
     private javax.swing.JTextField ipTextField;
-    private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane2;
     private com.hydrogenn.LineTree lineTree;
     private javax.swing.JLabel logLabel;
+    private javax.swing.JCheckBox multiProblemCheckbox;
     private javax.swing.JLabel nameLabel;
     private javax.swing.JTextField nameTextField;
     private javax.swing.JLabel portLabel;
