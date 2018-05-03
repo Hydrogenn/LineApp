@@ -15,6 +15,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.tree.DefaultTreeModel;
 
 /**
@@ -511,6 +512,12 @@ public class LineHandlerClientGUI extends javax.swing.JFrame {
     }
 
     void setProjects(List<String> projects) {
+        projectDropdown.setModel(new DefaultComboBoxModel(projects.toArray()));
+        if (projectDropdown.getItemCount() == 0) {
+            projectDropdown.addItem("Default (No projects available)");
+        } else {
+            projectDropdown.addItem("(Other)");
+        }
         this.projects = projects;
         lockInformation();
     }
