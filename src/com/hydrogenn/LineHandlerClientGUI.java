@@ -21,7 +21,6 @@ import javax.swing.tree.DefaultTreeModel;
  */
 public class LineHandlerClientGUI extends javax.swing.JFrame {
 
-    private boolean inLine = false;
     List<Problem> problems = new ArrayList<>();
 
     LineHandlerClient client = new LineHandlerClient(this);
@@ -121,14 +120,14 @@ public class LineHandlerClientGUI extends javax.swing.JFrame {
             .addGroup(problemPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(problemPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(projectLabel)
                     .addComponent(nameLabel)
+                    .addComponent(projectLabel)
                     .addComponent(problemLabel))
-                .addGap(18, 18, 18)
-                .addGroup(problemPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(projectDropdown, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(nameTextField)
-                    .addComponent(problemTextField))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(problemPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(projectDropdown, 0, 344, Short.MAX_VALUE)
+                    .addComponent(problemTextField)
+                    .addComponent(nameTextField))
                 .addContainerGap())
         );
         problemPanelLayout.setVerticalGroup(
@@ -139,12 +138,13 @@ public class LineHandlerClientGUI extends javax.swing.JFrame {
                     .addComponent(nameLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(problemPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(problemLabel)
-                    .addComponent(problemTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(projectDropdown, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(projectLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(problemPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(projectDropdown, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(projectLabel)))
+                    .addComponent(problemTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(problemLabel))
+                .addGap(0, 11, Short.MAX_VALUE))
         );
 
         customServerPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Server IP Address"));
@@ -296,19 +296,16 @@ public class LineHandlerClientGUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 //I HEV IDEA: MAKE THE PROBLEMS ON THE HOST IN CHECKLIST FORM OR MAKE IT HAVE LINKS ON THE SIDE TO RESOLVE AND REMOVE THEM FROM LSIT
     private void helpButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_helpButtonActionPerformed
-        int position = 0;
         Problem problem = new Problem(nameTextField.getText(), (String) projectDropdown.getSelectedItem(), problemTextField.getText());
         try {
             client.connect(ipTextField.getText(), Integer.parseInt(portTextField.getText()));
             client.send(problem);
             client.disconnect();
-            inLine = true;
         } catch (IOException ex) {
             log("Unable to connect to server.");
         }
-        cancelButton.setEnabled(true);
-        helpButton.setEnabled(false);
-        refreshButton.setEnabled(true);
+        
+        problems.add(problem);
 
         lockInformation();
         //queue.setText(Integer.toString(position));
@@ -317,7 +314,7 @@ public class LineHandlerClientGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_helpButtonActionPerformed
 
     private void nameTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nameTextFieldActionPerformed
-        // TODO add your handling code here:
+        helpButton.setEnabled(true);
     }//GEN-LAST:event_nameTextFieldActionPerformed
 
     private void serverCheckboxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_serverCheckboxActionPerformed
@@ -351,7 +348,6 @@ public class LineHandlerClientGUI extends javax.swing.JFrame {
             client.connect(ipTextField.getText(), Integer.parseInt(portTextField.getText()));
             client.remove(problem);
             client.disconnect();
-            inLine = false;
         } catch (IOException ex) {
             log("Unable to connect to server.");
         }
@@ -403,7 +399,7 @@ public class LineHandlerClientGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_exitButtonActionPerformed
 
     private void multiProblemCheckboxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_multiProblemCheckboxActionPerformed
-        // TODO add your handling code here:
+        lockInformation();
     }//GEN-LAST:event_multiProblemCheckboxActionPerformed
 
     /**
@@ -473,18 +469,21 @@ public class LineHandlerClientGUI extends javax.swing.JFrame {
     }
 
     void log(String publicMessage) {
-        System.out.println(publicMessage);
+        logLabel.setText(publicMessage);
     }
 
     void lockInformation() {
         for (Component component : problemPanel.getComponents()) {
-            component.setEnabled(!inLine);
+            if (component.equals(nameTextField)) {
+                component.setEnabled(problems.isEmpty());
+            } else {
+                component.setEnabled(multiProblemCheckbox.isSelected() || problems.isEmpty());
+            }
         }
         
-        helpButton.setEnabled(!inLine);
-        
-        refreshButton.setEnabled(inLine);
-        cancelButton.setEnabled(inLine);
+        helpButton.setEnabled(multiProblemCheckbox.isSelected() || problems.isEmpty());
+        refreshButton.setEnabled(multiProblemCheckbox.isSelected() || problems.isEmpty());
+        cancelButton.setEnabled(multiProblemCheckbox.isSelected() || problems.isEmpty());
         
     }
     
