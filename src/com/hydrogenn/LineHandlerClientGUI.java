@@ -511,12 +511,7 @@ public class LineHandlerClientGUI extends javax.swing.JFrame {
     }
 
     void setProjects(List<String> projects) {
-        projectDropdown.setModel(new DefaultComboBoxModel(projects.toArray()));
-        if (projectDropdown.getItemCount() == 0) {
-            projectDropdown.addItem("Default (No projects available)");
-        } else {
-            projectDropdown.addItem("(Other)");
-        }
+        this.projects = projects;
         lockInformation();
     }
 
