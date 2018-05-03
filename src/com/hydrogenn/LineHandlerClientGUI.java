@@ -7,7 +7,10 @@
 package com.hydrogenn;
 
 import java.awt.Component;
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -21,9 +24,10 @@ import javax.swing.tree.DefaultTreeModel;
 public class LineHandlerClientGUI extends javax.swing.JFrame {
 
     private boolean inLine = false;
-    
+
     List<String> projects = new ArrayList<>();
     List<Problem> problems = new ArrayList<>();
+    List<String> info = new ArrayList<>();
 
     LineHandlerClient client = new LineHandlerClient(this);
 
@@ -33,6 +37,26 @@ public class LineHandlerClientGUI extends javax.swing.JFrame {
      */
     public LineHandlerClientGUI() {
         initComponents();
+        
+        String fileName = "info.txt";
+        String line = null;
+
+        try {
+            FileReader fileReader = new FileReader(fileName);
+            BufferedReader bufferedReader = new BufferedReader(fileReader);
+
+            while ((line = bufferedReader.readLine()) != null) {
+                info.add(line);
+            }
+
+            bufferedReader.close();
+        } catch (FileNotFoundException ex) {
+            System.out.println("Unable to find file '" + fileName + "'");
+        } catch (IOException ex) {
+            System.out.println("Error reading file '" + fileName + "'");
+        }
+        
+        System.out.println(info);
     }
 
     /**
@@ -260,7 +284,9 @@ public class LineHandlerClientGUI extends javax.swing.JFrame {
                         .addComponent(exitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 6, Short.MAX_VALUE))
                     .addComponent(problemPanel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(multiProblemCheckbox, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addComponent(multiProblemCheckbox, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(103, 103, 103))
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING))
                 .addContainerGap())
         );
@@ -318,7 +344,7 @@ public class LineHandlerClientGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_helpButtonActionPerformed
 
     private void nameTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nameTextFieldActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_nameTextFieldActionPerformed
 
     private void serverCheckboxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_serverCheckboxActionPerformed
@@ -365,29 +391,8 @@ public class LineHandlerClientGUI extends javax.swing.JFrame {
 
     }//GEN-LAST:event_cancelButtonActionPerformed
 
-    private void saveInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveInfoActionPerformed
-        String fileName = "info.txt"; 
-
-        try {
-            FileWriter fileWriter = new FileWriter(fileName);
-            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
-            // Wrap FileWriter to write strings
-
-            bufferedWriter.write(nameTextField.getText());
-            bufferedWriter.newLine(); 
-            bufferedWriter.write(ipTextField.getText());
-            bufferedWriter.newLine(); 
-            bufferedWriter.write(portTextField.getText());
-            bufferedWriter.newLine(); 
-            bufferedWriter.close(); 
-        } catch (IOException ex) {
-            System.out.println("Error writing to file '" + fileName + "'");
-        }
-  
-    }//GEN-LAST:event_saveInfoActionPerformed
-
     private void projectsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_projectsButtonActionPerformed
-        
+
         Problem problem = new Problem(nameTextField.getText(), (String) projectDropdown.getSelectedItem(), problemTextField.getText());
         try {
             client.connect(ipTextField.getText(), Integer.parseInt(portTextField.getText()));
@@ -400,12 +405,33 @@ public class LineHandlerClientGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_projectsButtonActionPerformed
 
     private void exitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitButtonActionPerformed
+        String fileName = "name.txt";
+
+        try {
+            FileWriter fileWriter = new FileWriter(fileName);
+            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+            // Wrap FileWriter to write strings
+
+            bufferedWriter.write(nameTextField.getText());
+            bufferedWriter.newLine();
+            bufferedWriter.write(ipTextField.getText());
+            bufferedWriter.newLine();
+            bufferedWriter.write(portTextField.getText());
+            bufferedWriter.newLine();
+            bufferedWriter.close();
+        } catch (IOException ex) {
+            System.out.println("Error writing to file '" + fileName + "'");
+        }
         System.exit(0);
     }//GEN-LAST:event_exitButtonActionPerformed
 
     private void multiProblemCheckboxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_multiProblemCheckboxActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_multiProblemCheckboxActionPerformed
+
+    private void saveInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -481,14 +507,14 @@ public class LineHandlerClientGUI extends javax.swing.JFrame {
         for (Component component : problemPanel.getComponents()) {
             component.setEnabled(!inLine);
         }
-        
+
         helpButton.setEnabled(!inLine);
-        
+
         refreshButton.setEnabled(inLine);
         cancelButton.setEnabled(inLine);
-        
+
     }
-    
+
     void setProjects(List<String> projects) {
         this.projects = projects;
         lockInformation();
