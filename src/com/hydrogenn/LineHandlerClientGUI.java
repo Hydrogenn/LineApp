@@ -50,12 +50,14 @@ public class LineHandlerClientGUI extends javax.swing.JFrame {
 
             bufferedReader.close();
         } catch (FileNotFoundException ex) {
-            System.out.println("Unable to find file '" + fileName + "'");
+            log("'" + fileName + "' not found. Either this is your first time, or all data has been lost!");
         } catch (IOException ex) {
             System.out.println("Error reading file '" + fileName + "'");
         }
         
-        System.out.println(info);
+        nameTextField.setText(info.get(0));
+        ipTextField.setText(info.get(1));
+        portTextField.setText(info.get(2));
     }
 
     /**
@@ -325,17 +327,21 @@ public class LineHandlerClientGUI extends javax.swing.JFrame {
 //I HEV IDEA: MAKE THE PROBLEMS ON THE HOST IN CHECKLIST FORM OR MAKE IT HAVE LINKS ON THE SIDE TO RESOLVE AND REMOVE THEM FROM LSIT
     private void helpButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_helpButtonActionPerformed
         Problem problem = new Problem(nameTextField.getText(), (String) projectDropdown.getSelectedItem(), problemTextField.getText());
-        try {
-            client.connect(ipTextField.getText(), Integer.parseInt(portTextField.getText()));
-            client.send(problem);
-            client.disconnect();
-        } catch (IOException ex) {
-            log("Unable to connect to server.");
+        if (problems.contains(problem)) {
+            log("You can't post the same problem twice!");
+        } else {
+            try {
+                client.connect(ipTextField.getText(), Integer.parseInt(portTextField.getText()));
+                client.send(problem);
+                client.disconnect();
+            } catch (IOException ex) {
+                log("Unable to connect to server.");
+            }
         }
         
         problems.add(problem);
 
-        lockInformation();
+        update();
         //queue.setText(Integer.toString(position));
 
 
@@ -370,7 +376,7 @@ public class LineHandlerClientGUI extends javax.swing.JFrame {
 
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
 
-        Problem problem = new Problem(nameTextField.getText(), (String) projectDropdown.getSelectedItem(), problemTextField.getText());
+        Problem problem = problems.remove(problems.size()-1);
         try {
             client.connect(ipTextField.getText(), Integer.parseInt(portTextField.getText()));
             client.remove(problem);
@@ -378,12 +384,8 @@ public class LineHandlerClientGUI extends javax.swing.JFrame {
         } catch (IOException ex) {
             log("Unable to connect to server.");
         }
-        cancelButton.setEnabled(false);
-        helpButton.setEnabled(true);
-        refreshButton.setEnabled(false);
-
-        lockInformation();
-        //queue.setText(" ");
+        
+        update();
 
     }//GEN-LAST:event_cancelButtonActionPerformed
 
@@ -401,7 +403,7 @@ public class LineHandlerClientGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_projectsButtonActionPerformed
 
     private void exitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitButtonActionPerformed
-        String fileName = "name.txt";
+        String fileName = "info.txt";
 
         try {
             FileWriter fileWriter = new FileWriter(fileName);
@@ -422,7 +424,7 @@ public class LineHandlerClientGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_exitButtonActionPerformed
 
     private void multiProblemCheckboxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_multiProblemCheckboxActionPerformed
-        lockInformation();
+        update();
     }//GEN-LAST:event_multiProblemCheckboxActionPerformed
 
     private void saveInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -499,7 +501,7 @@ public class LineHandlerClientGUI extends javax.swing.JFrame {
         logLabel.setText(publicMessage);
     }
 
-    void lockInformation() {
+    void update() {
         for (Component component : problemPanel.getComponents()) {
             if (component.equals(nameTextField)) {
                 component.setEnabled(problems.isEmpty());
@@ -508,8 +510,10 @@ public class LineHandlerClientGUI extends javax.swing.JFrame {
             }
         }
         helpButton.setEnabled(multiProblemCheckbox.isSelected() || problems.isEmpty());
-        refreshButton.setEnabled(multiProblemCheckbox.isSelected() || problems.isEmpty());
-        cancelButton.setEnabled(multiProblemCheckbox.isSelected() || problems.isEmpty());
+        refreshButton.setEnabled(!problems.isEmpty());
+        cancelButton.setEnabled(!problems.isEmpty());
+        
+        lineTree.updateUI();
     }
 
     void setProjects(List<String> projects) {
@@ -520,7 +524,7 @@ public class LineHandlerClientGUI extends javax.swing.JFrame {
             projectDropdown.addItem("(Other)");
         }
         this.projects = projects;
-        lockInformation();
+        update();
     }
 
 }

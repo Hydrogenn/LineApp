@@ -257,7 +257,7 @@ public class LineHandlerServerGUI extends javax.swing.JFrame {
     }
     
     void removeLine(Problem problem) {
-        lineTree.resolveProblems();
+        lineTree.recallProblem(problem);
     }
     
     DefaultTreeModel getProblems() {
