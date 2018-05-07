@@ -7,36 +7,26 @@
 package com.hydrogenn;
 
 import java.awt.Component;
-import java.awt.Desktop;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.net.URI;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.tree.DefaultTreeModel;
-import java.util.Timer;
-import java.util.TimerTask;
 
 /**
  *
- * @author Joshua Davenport && Eddy Lui
+ * @author Joshua Davenport
  */
 public class LineHandlerClientGUI extends javax.swing.JFrame {
 
 
     private boolean inLine = false;
-    Timer timer;
-    public static int count = 0;
-
+    //public static int count = 0;
 
     List<String> projects = new ArrayList<>();
     List<Problem> problems = new ArrayList<>();
@@ -44,14 +34,13 @@ public class LineHandlerClientGUI extends javax.swing.JFrame {
 
     LineHandlerClient client = new LineHandlerClient(this);
 
-    public int time = 1000;
-
+    //private final static int TIME = 5000;
     /**
      * Creates new form LineHandlerClient
      */
     public LineHandlerClientGUI() {
         initComponents();
-
+        
         String fileName = "info.txt";
         String line = null;
 
@@ -69,25 +58,21 @@ public class LineHandlerClientGUI extends javax.swing.JFrame {
         } catch (IOException ex) {
             System.out.println("Error reading file '" + fileName + "'");
         }
-
-        nameTextField.setText(info.get(0));
-        ipTextField.setText(info.get(1));
-
-        System.out.println(info);
         
-        projectsButton.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mousePressed(MouseEvent e) {
-                count++;
-            }
-
-        });
+//        projectsButton.addMouseListener(new MouseAdapter() {
+//            @Override
+//            public void mousePressed(MouseEvent e) {
+//                count++;
+//            }
+//
+//        });
 
         
         nameTextField.setText(info.get(0));
         ipTextField.setText(info.get(1));
         portTextField.setText(info.get(2));
-
+        
+        System.out.println(info);
     }
 
     /**
@@ -101,6 +86,7 @@ public class LineHandlerClientGUI extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
         helpButton = new javax.swing.JButton();
         problemPanel = new javax.swing.JPanel();
         nameLabel = new javax.swing.JLabel();
@@ -123,6 +109,17 @@ public class LineHandlerClientGUI extends javax.swing.JFrame {
         logLabel = new javax.swing.JLabel();
         projectsButton = new javax.swing.JButton();
         multiProblemCheckbox = new javax.swing.JCheckBox();
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -149,6 +146,11 @@ public class LineHandlerClientGUI extends javax.swing.JFrame {
         problemLabel.setToolTipText("Some information about the problem you are having.");
 
         problemTextField.setToolTipText("Some information about the problem you are having.");
+        problemTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                problemTextFieldActionPerformed(evt);
+            }
+        });
 
         projectDropdown.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Please connect to server first." }));
         projectDropdown.setEnabled(false);
@@ -287,12 +289,9 @@ public class LineHandlerClientGUI extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-<<<<<<< HEAD
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(logLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addComponent(serverCheckbox, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(103, 103, 103))
+                    .addComponent(serverCheckbox, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(customServerPanel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(projectsButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
@@ -314,7 +313,9 @@ public class LineHandlerClientGUI extends javax.swing.JFrame {
                         .addComponent(exitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 6, Short.MAX_VALUE))
                     .addComponent(problemPanel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(multiProblemCheckbox, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addComponent(multiProblemCheckbox, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(103, 103, 103))
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING))
                         .addGap(0, 6, Short.MAX_VALUE)))
                 .addContainerGap())
@@ -374,16 +375,16 @@ public class LineHandlerClientGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_helpButtonActionPerformed
 
 
-    private void nameTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nameTextFieldActionPerformed
-    }//GEN-LAST:event_nameTextFieldActionPerformed
-
-
     private void serverCheckboxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_serverCheckboxActionPerformed
         customServerPanel.setEnabled(!serverCheckbox.isSelected());
         for (Component component : customServerPanel.getComponents()) {
             component.setEnabled(!serverCheckbox.isSelected());
         }
     }//GEN-LAST:event_serverCheckboxActionPerformed
+
+    private void problemTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_problemTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_problemTextFieldActionPerformed
 
     private void refreshButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshButtonActionPerformed
 
@@ -427,7 +428,7 @@ public class LineHandlerClientGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_projectsButtonActionPerformed
 
     private void exitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitButtonActionPerformed
-        String fileName = "info.txt";
+        String fileName = "name.txt";
 
         try {
             FileWriter fileWriter = new FileWriter(fileName);
@@ -437,6 +438,8 @@ public class LineHandlerClientGUI extends javax.swing.JFrame {
             bufferedWriter.write(nameTextField.getText());
             bufferedWriter.newLine();
             bufferedWriter.write(ipTextField.getText());
+            bufferedWriter.newLine();
+            bufferedWriter.write(portTextField.getText());
             bufferedWriter.newLine();
             bufferedWriter.close();
         } catch (IOException ex) {
@@ -462,8 +465,6 @@ public class LineHandlerClientGUI extends javax.swing.JFrame {
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
-        Timer timer = new Timer();
-
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -482,42 +483,14 @@ public class LineHandlerClientGUI extends javax.swing.JFrame {
         }
         //</editor-fold>
         //</editor-fold>
-        int count = 0;
+
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new LineHandlerClientGUI().setVisible(true);
             }
         });
-        System.out.println(count);
-        if(count >= 5) {
-            Calendar calendar = Calendar.getInstance();
-//        calendar.set(Calendar.MONTH, 3);
-//        calendar.set(Calendar.DAY_OF_MONTH, 1);
-            calendar.set(Calendar.HOUR_OF_DAY, 8);
-            calendar.set(Calendar.MINUTE, 00);
-            calendar.set(Calendar.SECOND, 00);
-            Date time = calendar.getTime();
-
-            timer.schedule(new rickRoll(),
-                    time);
-        }
-
     }
-
-    static class rickRoll extends TimerTask {
-
-        public void run() {
-            try {
-                Desktop desktop = java.awt.Desktop.getDesktop();
-                URI oURL = new URI("https://www.youtube.com/watch?v=hVPE47krnMY");
-                desktop.browse(oURL);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cancelButton;
@@ -526,6 +499,7 @@ public class LineHandlerClientGUI extends javax.swing.JFrame {
     private javax.swing.JButton helpButton;
     private javax.swing.JLabel ipLabel;
     private javax.swing.JTextField ipTextField;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane2;
     private com.hydrogenn.LineTree lineTree;
     private javax.swing.JLabel logLabel;

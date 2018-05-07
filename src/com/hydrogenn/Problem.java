@@ -15,11 +15,6 @@ import java.io.Serializable;
 public class Problem implements Serializable {
     
     String name, project, problem;
-//    boolean rickRoll;
-//    
-//    public void rickRoll() {
-//        
-//    }
     
     public Problem(String name, String project, String problem) {
         this.name = name;
