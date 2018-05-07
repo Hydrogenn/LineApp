@@ -84,5 +84,19 @@ public class LineTree extends JTree implements Serializable {
     List<String> getProjects() {
         return new ArrayList(projects.keySet());
     }
+
+    boolean isProjectSelected() {
+        for (TreePath path : getSelectionPaths()) {
+            return true;
+        }
+        return false;
+    }
+
+    boolean isProblemSelected() {
+        for (TreePath path : getSelectionPaths()) {
+            return true;
+        }
+        return false;
+    }
     
 }

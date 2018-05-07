@@ -42,8 +42,9 @@ public class LineHandlerServerGUI extends javax.swing.JFrame {
         loadButton = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         lineTree = new com.hydrogenn.LineTree();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        ascendButton = new javax.swing.JButton();
+        descendButton = new javax.swing.JButton();
+        removeProjectButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -72,11 +73,36 @@ public class LineHandlerServerGUI extends javax.swing.JFrame {
 
         loadButton.setText("Load Class");
 
+        lineTree.addTreeSelectionListener(new javax.swing.event.TreeSelectionListener() {
+            public void valueChanged(javax.swing.event.TreeSelectionEvent evt) {
+                lineTreeValueChanged(evt);
+            }
+        });
         jScrollPane2.setViewportView(lineTree);
 
-        jButton1.setText("Increase Priority");
+        ascendButton.setText("Increase Priority");
+        ascendButton.setEnabled(false);
+        ascendButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ascendButtonActionPerformed(evt);
+            }
+        });
 
-        jButton2.setText("Decrease Priority");
+        descendButton.setText("Decrease Priority");
+        descendButton.setEnabled(false);
+        descendButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                descendButtonActionPerformed(evt);
+            }
+        });
+
+        removeProjectButton.setText("Remove Project");
+        removeProjectButton.setEnabled(false);
+        removeProjectButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                removeProjectButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -84,50 +110,57 @@ public class LineHandlerServerGUI extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(solveButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton2))
-                    .addComponent(jScrollPane2)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(projectName, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(addProjectButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(saveButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(loadButton))
-                    .addComponent(logLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(0, 13, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(projectName, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(addProjectButton)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(loadButton, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(saveButton, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(solveButton)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(removeProjectButton)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(ascendButton)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(descendButton)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(logLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jScrollPane2))
+                        .addContainerGap())))
         );
 
-        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {addProjectButton, loadButton, saveButton});
+        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {ascendButton, descendButton, removeProjectButton, solveButton});
 
-        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jButton1, jButton2, solveButton});
+        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {addProjectButton, loadButton, saveButton});
 
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(addProjectButton)
                     .addComponent(projectName)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(addProjectButton)
-                        .addComponent(saveButton)
-                        .addComponent(loadButton)))
+                    .addComponent(loadButton)
+                    .addComponent(saveButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 314, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(solveButton)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
+                    .addComponent(ascendButton)
+                    .addComponent(descendButton)
+                    .addComponent(removeProjectButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(logLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(41, 41, 41))
+                .addComponent(logLabel)
+                .addContainerGap())
         );
 
         pack();
@@ -140,6 +173,31 @@ public class LineHandlerServerGUI extends javax.swing.JFrame {
     private void addProjectButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addProjectButtonActionPerformed
         lineTree.addProject(projectName.getText());
     }//GEN-LAST:event_addProjectButtonActionPerformed
+
+    private void lineTreeValueChanged(javax.swing.event.TreeSelectionEvent evt) {//GEN-FIRST:event_lineTreeValueChanged
+        //TODO update the buttons based on what is selected
+        
+        boolean isProjectSelected = lineTree.isProjectSelected();
+        boolean isProblemSelected = lineTree.isProblemSelected();
+        
+        solveButton.setEnabled(isProblemSelected);
+        removeProjectButton.setEnabled(isProjectSelected);
+        ascendButton.setEnabled(isProjectSelected);
+        descendButton.setEnabled(isProjectSelected);
+        
+    }//GEN-LAST:event_lineTreeValueChanged
+
+    private void removeProjectButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeProjectButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_removeProjectButtonActionPerformed
+
+    private void ascendButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ascendButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ascendButtonActionPerformed
+
+    private void descendButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_descendButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_descendButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -177,13 +235,14 @@ public class LineHandlerServerGUI extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addProjectButton;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton ascendButton;
+    private javax.swing.JButton descendButton;
     private javax.swing.JScrollPane jScrollPane2;
     private com.hydrogenn.LineTree lineTree;
     private javax.swing.JButton loadButton;
     private javax.swing.JLabel logLabel;
     private javax.swing.JTextField projectName;
+    private javax.swing.JButton removeProjectButton;
     private javax.swing.JButton saveButton;
     private javax.swing.JButton solveButton;
     // End of variables declaration//GEN-END:variables
