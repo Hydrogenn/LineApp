@@ -7,6 +7,8 @@
 package com.hydrogenn;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
 import javax.swing.JTree;
@@ -22,6 +24,7 @@ import javax.swing.tree.TreePath;
 public class LineTree extends JTree implements Serializable {
     
     HashMap<String, DefaultMutableTreeNode> projects = new HashMap<>();
+    HashMap<Problem, DefaultMutableTreeNode> problems = new HashMap<>();
     
     DefaultTreeModel model;
     DefaultMutableTreeNode root;
@@ -52,11 +55,15 @@ public class LineTree extends JTree implements Serializable {
         //TODO add problem to correct project
         DefaultMutableTreeNode problemNode = new DefaultMutableTreeNode(problem);
         projects.getOrDefault(problem.getProject(), other).add(problemNode);
+        problems.put(problem, problemNode);
         updateUI();
     }
     
     public void recallProblem(Problem problem) {
-        projects.getOrDefault(problem.getProject(), other).remove(new DefaultMutableTreeNode(problem));
+        if (problems.containsKey(problem)) {
+            projects.getOrDefault(problem.getProject(), other).remove(problems.get(problem));
+            problems.remove(problem);
+        }
         updateUI();
     }
     
@@ -81,7 +88,21 @@ public class LineTree extends JTree implements Serializable {
     }
 
     List<String> getProjects() {
-        return (List<String>) projects.keySet();
+        return new ArrayList(projects.keySet());
+    }
+
+    boolean isProjectSelected() {
+        for (TreePath path : getSelectionPaths()) {
+            return true;
+        }
+        return false;
+    }
+
+    boolean isProblemSelected() {
+        for (TreePath path : getSelectionPaths()) {
+            return true;
+        }
+        return false;
     }
     
 }

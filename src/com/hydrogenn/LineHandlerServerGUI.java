@@ -37,7 +37,7 @@ public class LineHandlerServerGUI extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        solveProblemButton = new javax.swing.JButton();
+        solveButton = new javax.swing.JButton();
         logLabel = new javax.swing.JLabel();
         projectName = new javax.swing.JTextField();
         addProjectButton = new javax.swing.JButton();
@@ -45,15 +45,21 @@ public class LineHandlerServerGUI extends javax.swing.JFrame {
         loadButton = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         lineTree = new com.hydrogenn.LineTree();
+<<<<<<< HEAD
         rickRoll = new javax.swing.JButton();
+=======
+        ascendButton = new javax.swing.JButton();
+        descendButton = new javax.swing.JButton();
+        removeProjectButton = new javax.swing.JButton();
+>>>>>>> 68639ef72cd990927e7eeec86bbdf45f15ac51cb
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        solveProblemButton.setText("Solve Problem");
-        solveProblemButton.setEnabled(false);
-        solveProblemButton.addActionListener(new java.awt.event.ActionListener() {
+        solveButton.setText("Solve Problems");
+        solveButton.setEnabled(false);
+        solveButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                solveProblemButtonActionPerformed(evt);
+                solveButtonActionPerformed(evt);
             }
         });
 
@@ -74,12 +80,41 @@ public class LineHandlerServerGUI extends javax.swing.JFrame {
 
         loadButton.setText("Load Class");
 
+        lineTree.addTreeSelectionListener(new javax.swing.event.TreeSelectionListener() {
+            public void valueChanged(javax.swing.event.TreeSelectionEvent evt) {
+                lineTreeValueChanged(evt);
+            }
+        });
         jScrollPane2.setViewportView(lineTree);
 
+<<<<<<< HEAD
         rickRoll.setText("Rick Roll");
         rickRoll.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 rickRollActionPerformed(evt);
+=======
+        ascendButton.setText("Increase Priority");
+        ascendButton.setEnabled(false);
+        ascendButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ascendButtonActionPerformed(evt);
+            }
+        });
+
+        descendButton.setText("Decrease Priority");
+        descendButton.setEnabled(false);
+        descendButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                descendButtonActionPerformed(evt);
+            }
+        });
+
+        removeProjectButton.setText("Remove Project");
+        removeProjectButton.setEnabled(false);
+        removeProjectButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                removeProjectButtonActionPerformed(evt);
+>>>>>>> 68639ef72cd990927e7eeec86bbdf45f15ac51cb
             }
         });
 
@@ -90,58 +125,83 @@ public class LineHandlerServerGUI extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+<<<<<<< HEAD
                     .addComponent(jScrollPane2)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(logLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(rickRoll))
+=======
+>>>>>>> 68639ef72cd990927e7eeec86bbdf45f15ac51cb
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(projectName, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(addProjectButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(solveProblemButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(saveButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(loadButton)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(projectName, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(addProjectButton)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(loadButton, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(saveButton, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(solveButton)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(removeProjectButton)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(ascendButton)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(descendButton)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(logLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jScrollPane2))
+                        .addContainerGap())))
         );
 
-        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {addProjectButton, loadButton, saveButton, solveProblemButton});
+        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {ascendButton, descendButton, removeProjectButton, solveButton});
+
+        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {addProjectButton, loadButton, saveButton});
 
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(addProjectButton)
                     .addComponent(projectName)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(solveProblemButton)
-                        .addComponent(addProjectButton)
-                        .addComponent(saveButton)
-                        .addComponent(loadButton)))
+                    .addComponent(loadButton)
+                    .addComponent(saveButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 314, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+<<<<<<< HEAD
                     .addComponent(logLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(rickRoll))
+=======
+                    .addComponent(solveButton)
+                    .addComponent(ascendButton)
+                    .addComponent(descendButton)
+                    .addComponent(removeProjectButton))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(logLabel)
+>>>>>>> 68639ef72cd990927e7eeec86bbdf45f15ac51cb
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void solveProblemButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_solveProblemButtonActionPerformed
+    private void solveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_solveButtonActionPerformed
         lineTree.resolveProblems();
-    }//GEN-LAST:event_solveProblemButtonActionPerformed
+    }//GEN-LAST:event_solveButtonActionPerformed
 
     private void addProjectButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addProjectButtonActionPerformed
         lineTree.addProject(projectName.getText());
     }//GEN-LAST:event_addProjectButtonActionPerformed
 
+<<<<<<< HEAD
     private void rickRollActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rickRollActionPerformed
 
         try {
@@ -152,6 +212,32 @@ public class LineHandlerServerGUI extends javax.swing.JFrame {
             e.printStackTrace();
         }
     }//GEN-LAST:event_rickRollActionPerformed
+=======
+    private void lineTreeValueChanged(javax.swing.event.TreeSelectionEvent evt) {//GEN-FIRST:event_lineTreeValueChanged
+        //TODO update the buttons based on what is selected
+        
+        boolean isProjectSelected = lineTree.isProjectSelected();
+        boolean isProblemSelected = lineTree.isProblemSelected();
+        
+        solveButton.setEnabled(isProblemSelected);
+        removeProjectButton.setEnabled(isProjectSelected);
+        ascendButton.setEnabled(isProjectSelected);
+        descendButton.setEnabled(isProjectSelected);
+        
+    }//GEN-LAST:event_lineTreeValueChanged
+
+    private void removeProjectButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeProjectButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_removeProjectButtonActionPerformed
+
+    private void ascendButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ascendButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ascendButtonActionPerformed
+
+    private void descendButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_descendButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_descendButtonActionPerformed
+>>>>>>> 68639ef72cd990927e7eeec86bbdf45f15ac51cb
 
     /**
      * @param args the command line arguments
@@ -189,14 +275,20 @@ public class LineHandlerServerGUI extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addProjectButton;
+    private javax.swing.JButton ascendButton;
+    private javax.swing.JButton descendButton;
     private javax.swing.JScrollPane jScrollPane2;
     private com.hydrogenn.LineTree lineTree;
     private javax.swing.JButton loadButton;
     private javax.swing.JLabel logLabel;
     private javax.swing.JTextField projectName;
+<<<<<<< HEAD
     private javax.swing.JButton rickRoll;
+=======
+    private javax.swing.JButton removeProjectButton;
+>>>>>>> 68639ef72cd990927e7eeec86bbdf45f15ac51cb
     private javax.swing.JButton saveButton;
-    private javax.swing.JButton solveProblemButton;
+    private javax.swing.JButton solveButton;
     // End of variables declaration//GEN-END:variables
 
     void log(String string) {
@@ -209,7 +301,7 @@ public class LineHandlerServerGUI extends javax.swing.JFrame {
     }
 
     void removeLine(Problem problem) {
-        lineTree.resolveProblems();
+        lineTree.recallProblem(problem);
     }
 
     DefaultTreeModel getProblems() {

@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.tree.DefaultTreeModel;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -31,8 +32,10 @@ import java.util.TimerTask;
  */
 public class LineHandlerClientGUI extends javax.swing.JFrame {
 
+
     private boolean inLine = false;
     Timer timer;
+    public static int count = 0;
 
 
     List<String> projects = new ArrayList<>();
@@ -62,10 +65,11 @@ public class LineHandlerClientGUI extends javax.swing.JFrame {
 
             bufferedReader.close();
         } catch (FileNotFoundException ex) {
-            System.out.println("Unable to find file '" + fileName + "'");
+            log("'" + fileName + "' not found. Either this is your first time, or all data has been lost!");
         } catch (IOException ex) {
             System.out.println("Error reading file '" + fileName + "'");
         }
+
         nameTextField.setText(info.get(0));
         ipTextField.setText(info.get(1));
 
@@ -78,6 +82,12 @@ public class LineHandlerClientGUI extends javax.swing.JFrame {
             }
 
         });
+
+        
+        nameTextField.setText(info.get(0));
+        ipTextField.setText(info.get(1));
+        portTextField.setText(info.get(2));
+
     }
 
     /**
@@ -150,14 +160,14 @@ public class LineHandlerClientGUI extends javax.swing.JFrame {
             .addGroup(problemPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(problemPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(projectLabel)
                     .addComponent(nameLabel)
+                    .addComponent(projectLabel)
                     .addComponent(problemLabel))
-                .addGap(18, 18, 18)
-                .addGroup(problemPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(projectDropdown, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(nameTextField)
-                    .addComponent(problemTextField))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(problemPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(projectDropdown, 0, 344, Short.MAX_VALUE)
+                    .addComponent(problemTextField)
+                    .addComponent(nameTextField))
                 .addContainerGap())
         );
         problemPanelLayout.setVerticalGroup(
@@ -168,12 +178,13 @@ public class LineHandlerClientGUI extends javax.swing.JFrame {
                     .addComponent(nameLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(problemPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(problemLabel)
-                    .addComponent(problemTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(projectDropdown, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(projectLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(problemPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(projectDropdown, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(projectLabel)))
+                    .addComponent(problemTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(problemLabel))
+                .addGap(0, 11, Short.MAX_VALUE))
         );
 
         customServerPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Server IP Address"));
@@ -252,6 +263,9 @@ public class LineHandlerClientGUI extends javax.swing.JFrame {
             }
         });
 
+        logLabel.setForeground(new java.awt.Color(153, 153, 153));
+        logLabel.setText("LineMaster™");
+
         projectsButton.setText("Get Projects From Server");
         projectsButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -271,8 +285,9 @@ public class LineHandlerClientGUI extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
+<<<<<<< HEAD
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(logLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
@@ -281,6 +296,15 @@ public class LineHandlerClientGUI extends javax.swing.JFrame {
                     .addComponent(customServerPanel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(projectsButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(logLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(serverCheckbox, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(customServerPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(projectsButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(problemPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(multiProblemCheckbox, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2)
+                    .addGroup(layout.createSequentialGroup()
                         .addComponent(refreshButton, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(helpButton, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -292,6 +316,7 @@ public class LineHandlerClientGUI extends javax.swing.JFrame {
                     .addComponent(problemPanel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(multiProblemCheckbox, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING))
+                        .addGap(0, 6, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -313,13 +338,13 @@ public class LineHandlerClientGUI extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(logLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(refreshButton)
                     .addComponent(helpButton)
                     .addComponent(cancelButton)
-                    .addComponent(exitButton)
-                    .addComponent(refreshButton))
+                    .addComponent(exitButton))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(logLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -327,25 +352,31 @@ public class LineHandlerClientGUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 //I HEV IDEA: MAKE THE PROBLEMS ON THE HOST IN CHECKLIST FORM OR MAKE IT HAVE LINKS ON THE SIDE TO RESOLVE AND REMOVE THEM FROM LSIT
     private void helpButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_helpButtonActionPerformed
-        int position = 0;
         Problem problem = new Problem(nameTextField.getText(), (String) projectDropdown.getSelectedItem(), problemTextField.getText());
-        try {
-            client.connect(ipTextField.getText(), Integer.parseInt(portTextField.getText()));
-            client.send(problem);
-            client.disconnect();
-            inLine = true;
-        } catch (IOException ex) {
-            log("Unable to connect to server.");
+        if (problems.contains(problem)) {
+            log("You can't post the same problem twice!");
+        } else {
+            try {
+                client.connect(ipTextField.getText(), Integer.parseInt(portTextField.getText()));
+                client.send(problem);
+                client.disconnect();
+            } catch (IOException ex) {
+                log("Unable to connect to server.");
+            }
         }
-        cancelButton.setEnabled(true);
-        helpButton.setEnabled(false);
-        refreshButton.setEnabled(true);
+        
+        problems.add(problem);
 
-        lockInformation();
+        update();
         //queue.setText(Integer.toString(position));
 
 
     }//GEN-LAST:event_helpButtonActionPerformed
+
+
+    private void nameTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nameTextFieldActionPerformed
+    }//GEN-LAST:event_nameTextFieldActionPerformed
+
 
     private void serverCheckboxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_serverCheckboxActionPerformed
         customServerPanel.setEnabled(!serverCheckbox.isSelected());
@@ -369,21 +400,16 @@ public class LineHandlerClientGUI extends javax.swing.JFrame {
 
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
 
-        Problem problem = new Problem(nameTextField.getText(), (String) projectDropdown.getSelectedItem(), problemTextField.getText());
+        Problem problem = problems.remove(problems.size()-1);
         try {
             client.connect(ipTextField.getText(), Integer.parseInt(portTextField.getText()));
             client.remove(problem);
             client.disconnect();
-            inLine = false;
         } catch (IOException ex) {
             log("Unable to connect to server.");
         }
-        cancelButton.setEnabled(false);
-        helpButton.setEnabled(true);
-        refreshButton.setEnabled(false);
-
-        lockInformation();
-        //queue.setText(" ");
+        
+        update();
 
     }//GEN-LAST:event_cancelButtonActionPerformed
 
@@ -420,7 +446,7 @@ public class LineHandlerClientGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_exitButtonActionPerformed
 
     private void multiProblemCheckboxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_multiProblemCheckboxActionPerformed
-        // TODO add your handling code here:
+        update();
     }//GEN-LAST:event_multiProblemCheckboxActionPerformed
 
     private void saveInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -523,24 +549,33 @@ public class LineHandlerClientGUI extends javax.swing.JFrame {
     }
 
     void log(String publicMessage) {
-        System.out.println(publicMessage);
+        logLabel.setText(publicMessage);
     }
 
-    void lockInformation() {
+    void update() {
         for (Component component : problemPanel.getComponents()) {
-            component.setEnabled(!inLine);
+            if (component.equals(nameTextField)) {
+                component.setEnabled(problems.isEmpty());
+            } else {
+                component.setEnabled(multiProblemCheckbox.isSelected() || problems.isEmpty());
+            }
         }
-
-        helpButton.setEnabled(!inLine);
-
-        refreshButton.setEnabled(inLine);
-        cancelButton.setEnabled(inLine);
-
+        helpButton.setEnabled(multiProblemCheckbox.isSelected() || problems.isEmpty());
+        refreshButton.setEnabled(!problems.isEmpty());
+        cancelButton.setEnabled(!problems.isEmpty());
+        
+        lineTree.updateUI();
     }
 
     void setProjects(List<String> projects) {
+        projectDropdown.setModel(new DefaultComboBoxModel(projects.toArray()));
+        if (projectDropdown.getItemCount() == 0) {
+            projectDropdown.addItem("Default (No projects available)");
+        } else {
+            projectDropdown.addItem("(Other)");
+        }
         this.projects = projects;
-        lockInformation();
+        update();
     }
 
 }
