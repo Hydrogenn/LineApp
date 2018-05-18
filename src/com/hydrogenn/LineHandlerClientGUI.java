@@ -7,12 +7,16 @@
 package com.hydrogenn;
 
 import java.awt.Component;
+import java.awt.Desktop;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
@@ -24,9 +28,8 @@ import javax.swing.tree.DefaultTreeModel;
  */
 public class LineHandlerClientGUI extends javax.swing.JFrame {
 
-
     private boolean inLine = false;
-    //public static int count = 0;
+    public static int count = 0;
 
     List<String> projects = new ArrayList<>();
     List<Problem> problems = new ArrayList<>();
@@ -40,7 +43,7 @@ public class LineHandlerClientGUI extends javax.swing.JFrame {
      */
     public LineHandlerClientGUI() {
         initComponents();
-        
+
         String fileName = "info.txt";
         String line = null;
 
@@ -58,20 +61,29 @@ public class LineHandlerClientGUI extends javax.swing.JFrame {
         } catch (IOException ex) {
             System.out.println("Error reading file '" + fileName + "'");
         }
-        
-//        projectsButton.addMouseListener(new MouseAdapter() {
-//            @Override
-//            public void mousePressed(MouseEvent e) {
-//                count++;
-//            }
-//
-//        });
 
-        
+        projectsButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                count++;
+            }
+
+        });
+
+        if (count == 5) {
+            try {
+                Desktop desktop = java.awt.Desktop.getDesktop();
+                URI oURL = new URI("https://www.youtube.com/watch?v=hVPE47krnMY");
+                desktop.browse(oURL);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
         nameTextField.setText(info.get(0));
         ipTextField.setText(info.get(1));
         portTextField.setText(info.get(2));
-        
+
         System.out.println(info);
     }
 
@@ -195,6 +207,11 @@ public class LineHandlerClientGUI extends javax.swing.JFrame {
 
         ipTextField.setText("127.0.0.1");
         ipTextField.setEnabled(false);
+        ipTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ipTextFieldActionPerformed(evt);
+            }
+        });
 
         ipLabel.setText("IP Address:");
         ipLabel.setEnabled(false);
@@ -289,12 +306,6 @@ public class LineHandlerClientGUI extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(logLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(serverCheckbox, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(customServerPanel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(projectsButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(logLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(serverCheckbox, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -311,12 +322,6 @@ public class LineHandlerClientGUI extends javax.swing.JFrame {
                         .addComponent(cancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(exitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 6, Short.MAX_VALUE))
-                    .addComponent(problemPanel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addComponent(multiProblemCheckbox, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(103, 103, 103))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING))
                         .addGap(0, 6, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -351,7 +356,7 @@ public class LineHandlerClientGUI extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-//I HEV IDEA: MAKE THE PROBLEMS ON THE HOST IN CHECKLIST FORM OR MAKE IT HAVE LINKS ON THE SIDE TO RESOLVE AND REMOVE THEM FROM LSIT
+
     private void helpButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_helpButtonActionPerformed
         Problem problem = new Problem(nameTextField.getText(), (String) projectDropdown.getSelectedItem(), problemTextField.getText());
         if (problems.contains(problem)) {
@@ -365,7 +370,7 @@ public class LineHandlerClientGUI extends javax.swing.JFrame {
                 log("Unable to connect to server.");
             }
         }
-        
+
         problems.add(problem);
 
         update();
@@ -373,7 +378,6 @@ public class LineHandlerClientGUI extends javax.swing.JFrame {
 
 
     }//GEN-LAST:event_helpButtonActionPerformed
-
 
     private void serverCheckboxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_serverCheckboxActionPerformed
         customServerPanel.setEnabled(!serverCheckbox.isSelected());
@@ -401,7 +405,7 @@ public class LineHandlerClientGUI extends javax.swing.JFrame {
 
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
 
-        Problem problem = problems.remove(problems.size()-1);
+        Problem problem = problems.remove(problems.size() - 1);
         try {
             client.connect(ipTextField.getText(), Integer.parseInt(portTextField.getText()));
             client.remove(problem);
@@ -409,7 +413,7 @@ public class LineHandlerClientGUI extends javax.swing.JFrame {
         } catch (IOException ex) {
             log("Unable to connect to server.");
         }
-        
+
         update();
 
     }//GEN-LAST:event_cancelButtonActionPerformed
@@ -455,6 +459,10 @@ public class LineHandlerClientGUI extends javax.swing.JFrame {
     private void saveInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void ipTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ipTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ipTextFieldActionPerformed
 
     /**
      * @param args the command line arguments
@@ -537,7 +545,7 @@ public class LineHandlerClientGUI extends javax.swing.JFrame {
         helpButton.setEnabled(multiProblemCheckbox.isSelected() || problems.isEmpty());
         refreshButton.setEnabled(!problems.isEmpty());
         cancelButton.setEnabled(!problems.isEmpty());
-        
+
         lineTree.updateUI();
     }
 

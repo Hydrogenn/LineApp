@@ -178,13 +178,13 @@ public class LineHandlerServerGUI extends javax.swing.JFrame {
 
     private void rickRollActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rickRollActionPerformed
 
-        try {
-            Desktop desktop = java.awt.Desktop.getDesktop();
-            URI oURL = new URI("https://www.youtube.com/watch?v=hVPE47krnMY");
-            desktop.browse(oURL);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+//        try {
+//            Desktop desktop = java.awt.Desktop.getDesktop();
+//            URI oURL = new URI("https://www.youtube.com/watch?v=hVPE47krnMY");
+//            desktop.browse(oURL);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
     }//GEN-LAST:event_rickRollActionPerformed
     private void lineTreeValueChanged(javax.swing.event.TreeSelectionEvent evt) {//GEN-FIRST:event_lineTreeValueChanged
         //TODO update the buttons based on what is selected
