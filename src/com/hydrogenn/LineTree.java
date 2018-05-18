@@ -11,7 +11,9 @@ import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
+import javax.swing.DropMode;
 import javax.swing.JTree;
+import javax.swing.TransferHandler;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeCellRenderer;
 import javax.swing.tree.DefaultTreeModel;
@@ -92,17 +94,37 @@ public class LineTree extends JTree implements Serializable {
     }
 
     boolean isProjectSelected() {
+        if (getSelectionPaths().length == 0) return false;
         for (TreePath path : getSelectionPaths()) {
-            return true;
+            if (problems.containsValue((DefaultMutableTreeNode) path.getLastPathComponent())) return false;
         }
-        return false;
+        return true;
     }
 
     boolean isProblemSelected() {
-        for (TreePath path : getSelectionPaths()) {
-            return true;
+        TreePath[] selectionpath = getSelectionPaths();
+        if (selectionpath.length == 0) return false;
+        for (TreePath path : selectionpath) {
+            if (projects.containsValue((DefaultMutableTreeNode) path.getLastPathComponent())) return false;
         }
-        return false;
+        return true;
+    }
+    
+    private void adjustSinglePriority(boolean increasing) {
+        
+        //TODO remove object and insert in the right spot
+        
+        
+    }
+
+    void adjustPriority(boolean increasing) {
+        if (!isProjectSelected()) return;
+        TreePath[] selectionPath = getSelectionPaths();
+        
+        for (TreePath path : selectionPath) {
+            adjustSinglePriority(increasing);
+        }
+        
     }
     
 }

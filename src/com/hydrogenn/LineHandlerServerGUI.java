@@ -200,15 +200,15 @@ public class LineHandlerServerGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_lineTreeValueChanged
 
     private void removeProjectButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeProjectButtonActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_removeProjectButtonActionPerformed
 
     private void ascendButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ascendButtonActionPerformed
-        // TODO add your handling code here:
+        lineTree.adjustPriority(true);
     }//GEN-LAST:event_ascendButtonActionPerformed
 
     private void descendButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_descendButtonActionPerformed
-        // TODO add your handling code here:
+        lineTree.adjustPriority(false);
     }//GEN-LAST:event_descendButtonActionPerformed
     /**
      * @param args the command line arguments
